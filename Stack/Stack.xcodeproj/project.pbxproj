@@ -16,6 +16,7 @@
 		2E4B4F161FB643D600D8FBFD /* StackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4B4F151FB643D600D8FBFD /* StackUITests.swift */; };
 		2ECA3B251FC0D30F004EBB85 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */; };
 		2ECA3B271FC0D343004EBB85 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA3B261FC0D343004EBB85 /* Task.swift */; };
+		FD5BB6C11FC1FCA4007FE558 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		2E4B4F171FB643D600D8FBFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		2ECA3B261FC0D343004EBB85 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				2E4B4EFE1FB643D600D8FBFD /* LaunchScreen.storyboard */,
 				2E4B4F011FB643D600D8FBFD /* Info.plist */,
 				2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */,
+				FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */,
 				2ECA3B261FC0D343004EBB85 /* Task.swift */,
 			);
 			path = Stack;
@@ -267,6 +270,7 @@
 			files = (
 				2ECA3B271FC0D343004EBB85 /* Task.swift in Sources */,
 				2E4B4EF81FB643D600D8FBFD /* ViewController.swift in Sources */,
+				FD5BB6C11FC1FCA4007FE558 /* EditTaskViewController.swift in Sources */,
 				2ECA3B251FC0D30F004EBB85 /* AddTaskViewController.swift in Sources */,
 				2E4B4EF61FB643D600D8FBFD /* AppDelegate.swift in Sources */,
 			);

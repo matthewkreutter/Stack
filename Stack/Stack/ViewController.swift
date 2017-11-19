@@ -87,7 +87,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        return
+        performSegue(withIdentifier: "editTaskSegue", sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,6 +101,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasks.remove(at: indexPath.row)
             UserDefaults.standard.set(tasks, forKey: "tasks")
             tableView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let clickedTask = segue.destination as? EditTaskViewController,
+            let taskIndex = tableView.indexPathForSelectedRow?.row,
+            let send = sender as? Task {
+            clickedTask.category = send.category
+            clickedTask.taskName = tasks[taskIndex]
         }
     }
     
