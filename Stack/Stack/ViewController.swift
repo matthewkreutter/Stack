@@ -8,19 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuStackView: UIStackView!
     var menuIsHidden = true
-    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var listLabel: UILabel!
     @IBOutlet weak var filterLabel: UILabel!
     @IBOutlet weak var newListOutlet: UIButton!
     @IBOutlet weak var dueDateOutlet: UIButton!
+    var tasks: [String] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
@@ -66,6 +69,39 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let myTasks = UserDefaults.standard.array(forKey: "tasks") {
+            tasks = myTasks as! [String]
+        }
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        return
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        return
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = tasks[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            tasks.remove(at: indexPath.row)
+            UserDefaults.standard.set(tasks, forKey: "tasks")
+            tableView.reloadData()
+        }
     }
     
     @IBAction func unwindSegue(unwindSegue:UIStoryboardSegue) {}
