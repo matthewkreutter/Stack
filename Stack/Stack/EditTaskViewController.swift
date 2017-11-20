@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EditTaskViewController: UIViewController, UIPickerViewDelegate {
+class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var taskName: String?
     var category: String?
     var importance: Int?
@@ -36,10 +36,13 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate {
         createDatePicker()
         createTimePicker()
         categoryView.delegate = self
+        categoryView.dataSource = self
         categoryField.inputView = categoryView
         importanceView.delegate = self
+        importanceView.dataSource = self
         importanceField.inputView = importanceView
         reminderView.delegate = self
+        reminderView.dataSource = self
         reminderField.inputView = reminderView
     }
     
@@ -79,19 +82,48 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate {
         self.view.endEditing(true)
     }
     
-    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryOption.count
+        if pickerView == categoryView {
+            return categoryOption.count
+        }
+        else if pickerView == importanceView {
+            return importanceOption.count
+        }
+        else if pickerView == reminderView {
+            return reminderOption.count
+        }
+        return 10
+        
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryOption[row]
+        if pickerView == categoryView {
+            return categoryOption[row]
+        }
+        else if pickerView == importanceView {
+            return importanceOption[row]
+        }
+        else if pickerView == reminderView {
+            return reminderOption[row]
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryField.text = categoryOption[row]
-        categoryField.endEditing(true)
+        if pickerView == categoryView {
+            categoryField.text = categoryOption[row]
+            categoryField.endEditing(true)
+        }
+        else if pickerView == importanceView {
+            importanceField.text = importanceOption[row]
+            importanceField.endEditing(true)
+        }
+        else if pickerView == reminderView {
+            reminderField.text = reminderOption[row]
+            reminderField.endEditing(true)
+        }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AddTaskViewController: UIViewController, UIPickerViewDelegate {
+class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var category: UITextField!
@@ -36,10 +36,13 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate {
         createTimePicker()
 
         categoryView.delegate = self
+        categoryView.dataSource = self
         category.inputView = categoryView
         importanceView.delegate = self
+        importanceView.dataSource = self
         importance.inputView = importanceView
         reminderView.delegate = self
+        reminderView.dataSource = self
         reminder.inputView = reminderView
         
     }
@@ -80,20 +83,49 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate {
         self.view.endEditing(true)
     }
     
-    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryOption.count
+        if pickerView == categoryView {
+            return categoryOption.count
+        }
+        else if pickerView == importanceView {
+            return importanceOption.count
+        }
+        else if pickerView == reminderView {
+            return reminderOption.count
+        }
+        return 10
+        
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryOption[row]
+        if pickerView == categoryView {
+            return categoryOption[row]
+        }
+        else if pickerView == importanceView {
+            return importanceOption[row]
+        }
+        else if pickerView == reminderView {
+            return reminderOption[row]
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        category.text = categoryOption[row]
-        category.endEditing(true)
+        if pickerView == categoryView {
+            category.text = categoryOption[row]
+            category.endEditing(true)
+        }
+        else if pickerView == importanceView {
+            importance.text = importanceOption[row]
+            importance.endEditing(true)
+        }
+        else if pickerView == reminderView {
+            reminder.text = reminderOption[row]
+            reminder.endEditing(true)
+        }
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
