@@ -128,6 +128,15 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        importance.resignFirstResponder()
+        category.resignFirstResponder()
+        reminder.resignFirstResponder()
+        date.resignFirstResponder()
+        time.resignFirstResponder()
+        taskName.resignFirstResponder()
+    }
+    
     @IBAction func addButtonTapped(_ sender: Any) {
         //tasks.append(Task(name: taskName.text!, category: category.text!, importance: importance.text!, date: date.text!, time: time.text!, reminder: reminder.text!)
         //tasks.append(Task(name: "test", category: "test", importance: "test", date: "test", time: "test", reminder: "test"))

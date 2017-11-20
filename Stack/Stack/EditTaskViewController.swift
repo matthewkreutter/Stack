@@ -18,7 +18,8 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var reminder: String?
     var categoryOption = ["Homework", "Chores", "Errands", "Miscellaneous"]
     var importanceOption = ["1","2","3","4","5","6","7","8","9","10"]
-    var reminderOption = ["1 Day","2 Days","3 Days","4 Days","5 Days", "6 Days", "7 Days"]
+    var reminderNumOption = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60",]
+    var reminderOption = ["Minutes","Hours","Days","Weeks"]
     
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var importanceField: UITextField!
@@ -83,6 +84,9 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == reminderView {
+            return 2
+        }
         return 1
     }
     
@@ -94,7 +98,12 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             return importanceOption.count
         }
         else if pickerView == reminderView {
-            return reminderOption.count
+            if (component == 0) {
+                return reminderNumOption.count
+            }
+            else if (component == 1){
+                return reminderOption.count
+            }
         }
         return 10
         
@@ -107,7 +116,12 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             return importanceOption[row]
         }
         else if pickerView == reminderView {
-            return reminderOption[row]
+            if (component == 0) {
+                return reminderNumOption[row]
+            }
+            else if (component == 1){
+                return reminderOption[row]
+            }
         }
         return ""
     }
@@ -122,7 +136,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             importanceField.endEditing(true)
         }
         else if pickerView == reminderView {
-            reminderField.text = reminderOption[row]
+            reminderField.text = reminderNumOption[row] + " " + reminderOption[row]
             reminderField.endEditing(true)
         }
     }
