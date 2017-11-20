@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     var taskName: String?
     var category: String?
     var importance: Int?
@@ -45,6 +45,20 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderView.delegate = self
         reminderView.dataSource = self
         reminderField.inputView = reminderView
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField == categoryField) {
+            let toolBar = UIToolbar()
+            toolBar.barStyle = .default
+            toolBar.isTranslucent = true
+            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+            toolBar.sizeToFit()
+//            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(EditTaskViewController.donePickerClick))
+            toolBar.setItems([doneButton], animated: false)
+            toolBar.isUserInteractionEnabled = true
+            categoryField.inputAccessoryView = toolBar
+        }
     }
     
     func createDatePicker() {
