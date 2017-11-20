@@ -504,9 +504,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcE-cO-fyT">
-                                <rect key="frame" x="16" y="396" width="343" height="140"/>
+                                <rect key="frame" x="16" y="385" width="343" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">A To-Do List App that cleanly prioritizes your tasks based off due date and priority level, so that you can always do the first task on the list instead of having to scroll through all your tasks to figure out which is most important.</string>
+                                <string key="text">Stack is an always sorted to-do list that cleanly prioritizes your tasks based on its priority and due date. Completing a task is as simple as looking at the top of the list instead of having to scroll through all your tasks to figure out what to do next.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
