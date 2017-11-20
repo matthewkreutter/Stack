@@ -366,6 +366,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9dQ-4z-4iB"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryField" destination="VhG-1Q-2Ol" id="wX4-eD-hgA"/>
+                        <outlet property="dateField" destination="AR1-kb-ahs" id="thF-UJ-TdY"/>
+                        <outlet property="importanceField" destination="NWd-00-KRK" id="Bx0-5O-ZgT"/>
+                        <outlet property="reminderField" destination="kSa-zz-pTc" id="iRL-c2-h94"/>
+                        <outlet property="timeField" destination="c6z-Zl-iR3" id="hk5-rL-IrQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZe-av-ubf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
