@@ -26,6 +26,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var dateField: UITextField!
     @IBOutlet weak var timeField: UITextField!
     @IBOutlet weak var reminderField: UITextField!
+    @IBOutlet weak var taskNameField: UITextField!
     let datePicker = UIDatePicker()
     let timePicker = UIDatePicker()
     let categoryView = UIPickerView()
@@ -47,19 +48,19 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderField.inputView = reminderView
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if (textField == categoryField) {
-            let toolBar = UIToolbar()
-            toolBar.barStyle = .default
-            toolBar.isTranslucent = true
-            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-            toolBar.sizeToFit()
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if (textField == categoryField) {
+//            let toolBar = UIToolbar()
+//            toolBar.barStyle = .default
+//            toolBar.isTranslucent = true
+//            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+//            toolBar.sizeToFit()
 //            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(EditTaskViewController.donePickerClick))
-            toolBar.setItems([doneButton], animated: false)
-            toolBar.isUserInteractionEnabled = true
-            categoryField.inputAccessoryView = toolBar
-        }
-    }
+//            toolBar.setItems([doneButton], animated: false)
+//            toolBar.isUserInteractionEnabled = true
+//            categoryField.inputAccessoryView = toolBar
+//        }
+//    }
     
     func createDatePicker() {
         datePicker.datePickerMode = .date
@@ -134,6 +135,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 return reminderNumOption[row]
             }
             else if (component == 1){
+                let num = reminderView.selectedRow(inComponent: 0)
                 return reminderOption[row]
             }
         }
@@ -150,8 +152,22 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             importanceField.endEditing(true)
         }
         else if pickerView == reminderView {
-            reminderField.text = reminderNumOption[row] + " " + reminderOption[row]
+
+            let num = reminderView.selectedRow(inComponent: 0)
+            let numType = reminderView.selectedRow(inComponent: 1)
+            let number = reminderNumOption[num]
+            let numberType = reminderOption[numType]
+            reminderField.text = number + " " + numberType
             reminderField.endEditing(true)
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        importanceField.resignFirstResponder()
+        categoryField.resignFirstResponder()
+        reminderField.resignFirstResponder()
+        dateField.resignFirstResponder()
+        timeField.resignFirstResponder()
+        taskNameField.resignFirstResponder()
     }
 }

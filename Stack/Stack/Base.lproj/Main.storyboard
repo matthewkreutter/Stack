@@ -379,6 +379,7 @@
                         <outlet property="dateField" destination="AR1-kb-ahs" id="thF-UJ-TdY"/>
                         <outlet property="importanceField" destination="NWd-00-KRK" id="Bx0-5O-ZgT"/>
                         <outlet property="reminderField" destination="kSa-zz-pTc" id="iRL-c2-h94"/>
+                        <outlet property="taskNameField" destination="Jvb-gQ-uaw" id="49Q-tt-M0v"/>
                         <outlet property="timeField" destination="c6z-Zl-iR3" id="hk5-rL-IrQ"/>
                     </connections>
                 </viewController>
