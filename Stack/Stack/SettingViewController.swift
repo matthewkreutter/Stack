@@ -55,10 +55,78 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == backgroundColorView {
+            if backgroundColorOption[row] == "Black" {
+                backgroundColorField.backgroundColor = UIColor.black
+            }
+            if backgroundColorOption[row] == "White" {
+                backgroundColorField.backgroundColor = UIColor.white
+            }
+            if backgroundColorOption[row] == "Red" {
+                backgroundColorField.backgroundColor = UIColor.red
+            }
+            if backgroundColorOption[row] == "Orange" {
+                backgroundColorField.backgroundColor = UIColor.orange
+            }
+            if backgroundColorOption[row] == "Yellow" {
+                backgroundColorField.backgroundColor = UIColor.yellow
+            }
+            if backgroundColorOption[row] == "Green" {
+                backgroundColorField.backgroundColor = UIColor.green
+            }
+            if backgroundColorOption[row] == "Blue" {
+                backgroundColorField.backgroundColor = UIColor.blue
+            }
+            if backgroundColorOption[row] == "Purple" {
+                backgroundColorField.backgroundColor = UIColor.purple
+            }
+            if backgroundColorOption[row] == "Grey" {
+                backgroundColorField.backgroundColor = UIColor.gray
+            }
+            backgroundColorField.textColor = UIColor.white
+            if backgroundColorOption[row] == "White" {
+                backgroundColorField.textColor = UIColor.black
+            }
+            if backgroundColorOption[row] == "Yellow" {
+                backgroundColorField.textColor = UIColor.black
+            }
             backgroundColorField.text = backgroundColorOption[row]
             backgroundColorField.endEditing(true)
         }
         else if pickerView == textColorView {
+            if textColorOption[row] == "Black" {
+                textColorField.backgroundColor = UIColor.black
+            }
+            if textColorOption[row] == "White" {
+                textColorField.backgroundColor = UIColor.white
+            }
+            if textColorOption[row] == "Red" {
+                textColorField.backgroundColor = UIColor.red
+            }
+            if textColorOption[row] == "Orange" {
+                textColorField.backgroundColor = UIColor.orange
+            }
+            if textColorOption[row] == "Yellow" {
+                textColorField.backgroundColor = UIColor.yellow
+            }
+            if textColorOption[row] == "Green" {
+                textColorField.backgroundColor = UIColor.green
+            }
+            if textColorOption[row] == "Blue" {
+                textColorField.backgroundColor = UIColor.blue
+            }
+            if textColorOption[row] == "Purple" {
+                textColorField.backgroundColor = UIColor.purple
+            }
+            if textColorOption[row] == "Grey" {
+                textColorField.backgroundColor = UIColor.gray
+            }
+            textColorField.textColor = UIColor.white
+            if textColorOption[row] == "White" {
+                textColorField.textColor = UIColor.black
+            }
+            if textColorOption[row] == "Yellow" {
+                textColorField.textColor = UIColor.black
+            }
             textColorField.text = textColorOption[row]
             textColorField.endEditing(true)
         }
