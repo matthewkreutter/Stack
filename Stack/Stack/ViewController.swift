@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var newListOutlet: UIButton!
     @IBOutlet weak var dueDateOutlet: UIButton!
     var tasks: [String] = []
+    var taskTypes: [String] = []
     
     
     override func viewDidLoad() {
@@ -46,6 +47,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    @IBAction func newListClicked(_ sender: Any) {
+        let newListPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newListPopUpID") as! AddListViewController
+        self.addChildViewController(newListPopUp)
+        newListPopUp.view.frame = self.view.frame
+        self.view.addSubview(newListPopUp.view)
+        newListPopUp.didMove(toParentViewController: self)
+        hideMenu()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
             guard let touchPoint = touches.first?.view else { return }

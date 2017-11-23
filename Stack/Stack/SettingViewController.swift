@@ -29,6 +29,30 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         textColorField.inputView = textColorView
     }
     
+    @IBAction func resetSettingsPressed(_ sender: Any) {
+        let resetSettingsPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "resetSettingsPopUpID") as! ResetSettingsViewController
+        self.addChildViewController(resetSettingsPopUp)
+        resetSettingsPopUp.view.frame = self.view.frame
+        self.view.addSubview(resetSettingsPopUp.view)
+        resetSettingsPopUp.didMove(toParentViewController: self)
+    }
+    
+    @IBAction func resetTasksPressed(_ sender: Any) {
+        let resetTasksPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "resetTasksPopUpID") as! ResetTasksViewController
+        self.addChildViewController(resetTasksPopUp)
+        resetTasksPopUp.view.frame = self.view.frame
+        self.view.addSubview(resetTasksPopUp.view)
+        resetTasksPopUp.didMove(toParentViewController: self)
+    }
+    
+    @IBAction func signOutPressed(_ sender: Any) {
+        let signOutPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signOutPopUpID") as! SigningOutViewController
+        self.addChildViewController(signOutPopUp)
+        signOutPopUp.view.frame = self.view.frame
+        self.view.addSubview(signOutPopUp.view)
+        signOutPopUp.didMove(toParentViewController: self)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

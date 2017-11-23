@@ -11,6 +11,68 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Reset Settings View Controller-->
+        <scene sceneID="35p-2q-PvO">
+            <objects>
+                <viewController storyboardIdentifier="resetSettingsPopUpID" id="tcQ-ad-IoN" customClass="ResetSettingsViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4y4-CS-d3f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-8m-QJB">
+                                <rect key="frame" x="67" y="273" width="240" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you want to reset your settings?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifI-MT-8LG">
+                                        <rect key="frame" x="20" y="18" width="200" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvX-R5-aOy">
+                                        <rect key="frame" x="50" y="75" width="30" height="30"/>
+                                        <state key="normal" title="Yes"/>
+                                        <connections>
+                                            <action selector="yesPressed:" destination="tcQ-ad-IoN" eventType="touchUpInside" id="YhR-wb-zN1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYb-BW-edm">
+                                        <rect key="frame" x="160" y="75" width="30" height="30"/>
+                                        <state key="normal" title="No"/>
+                                        <connections>
+                                            <action selector="noPressed:" destination="tcQ-ad-IoN" eventType="touchUpInside" id="rZJ-LY-Of9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="gvX-R5-aOy" firstAttribute="leading" secondItem="Vay-8m-QJB" secondAttribute="leading" constant="50" id="0Kr-dK-PnL"/>
+                                    <constraint firstAttribute="trailing" secondItem="EYb-BW-edm" secondAttribute="trailing" constant="50" id="Jwj-WC-PQu"/>
+                                    <constraint firstAttribute="width" constant="240" id="K1O-0N-dTZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="EYb-BW-edm" secondAttribute="bottom" constant="15" id="R0z-0y-3SM"/>
+                                    <constraint firstAttribute="height" constant="120" id="R36-z4-qbL"/>
+                                    <constraint firstAttribute="bottom" secondItem="gvX-R5-aOy" secondAttribute="bottom" constant="15" id="icd-sE-318"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vay-8m-QJB" firstAttribute="centerY" secondItem="4y4-CS-d3f" secondAttribute="centerY" id="7c9-az-KOy"/>
+                            <constraint firstItem="Vay-8m-QJB" firstAttribute="centerX" secondItem="4y4-CS-d3f" secondAttribute="centerX" id="UY5-iq-ld3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zim-iy-5Sy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aa6-JL-5hR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-783" y="32"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -59,6 +121,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDp-wj-NAi">
                                         <rect key="frame" x="0.0" y="170.5" width="98" height="30"/>
                                         <state key="normal" title="Add New List"/>
+                                        <connections>
+                                            <action selector="newListClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kjX-e2-xoq"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUI-GC-L0p">
                                         <rect key="frame" x="0.0" y="200.5" width="98" height="20.5"/>
@@ -255,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dv-Hr-jGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="-150"/>
+            <point key="canvasLocation" x="33" y="-749"/>
         </scene>
         <!--Edit Task View Controller-->
         <scene sceneID="0BB-Xg-yon">
@@ -385,7 +450,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZe-av-ubf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1024.8" y="620.23988005997012"/>
+            <point key="canvasLocation" x="849" y="-750"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="hGr-iU-SI3">
@@ -450,14 +515,23 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zo2-UB-dQ0">
                                 <rect key="frame" x="57.5" y="543.5" width="100" height="30"/>
                                 <state key="normal" title="Reset Settings"/>
+                                <connections>
+                                    <action selector="resetSettingsPressed:" destination="3Ii-8v-wXv" eventType="touchUpInside" id="yZP-1q-WKf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fx-8r-oDX">
                                 <rect key="frame" x="157.5" y="593.5" width="60" height="30"/>
                                 <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutPressed:" destination="3Ii-8v-wXv" eventType="touchUpInside" id="sp6-QU-YMV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KD-YS-DRV">
                                 <rect key="frame" x="226.5" y="543.5" width="82" height="30"/>
                                 <state key="normal" title="Reset Tasks"/>
+                                <connections>
+                                    <action selector="resetTasksPressed:" destination="3Ii-8v-wXv" eventType="touchUpInside" id="U9M-Ds-z4k"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -488,7 +562,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OY0-yS-tSx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="v7y-lT-QRG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-575.20000000000005" y="802.848575712144"/>
+            <point key="canvasLocation" x="849" y="803"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="VNb-SV-9cu">
@@ -547,7 +621,209 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQt-As-rI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5af-nn-9nQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="141.59999999999999" y="804.64767616191909"/>
+            <point key="canvasLocation" x="849" y="32"/>
+        </scene>
+        <!--Add List View Controller-->
+        <scene sceneID="022-X2-XdQ">
+            <objects>
+                <viewController storyboardIdentifier="newListPopUpID" id="bpF-aI-eQx" customClass="AddListViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wkk-sm-AAy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63x-ey-o4E">
+                                <rect key="frame" x="67" y="223" width="240" height="220"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What list would you like to add?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gM8-1W-Zfi">
+                                        <rect key="frame" x="44" y="30" width="152" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="152" id="dQw-1y-Wei"/>
+                                            <constraint firstAttribute="height" constant="50" id="rrk-bu-BAt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-CZ-DMR">
+                                        <rect key="frame" x="40" y="160" width="56" height="30"/>
+                                        <state key="normal" title="Add List"/>
+                                        <connections>
+                                            <action selector="listAdded:" destination="bpF-aI-eQx" eventType="touchUpInside" id="7xv-Pv-Bzg"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCD-Ot-aEn">
+                                        <rect key="frame" x="20" y="105" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="t1J-rI-zTr"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDe-Yq-2Yt">
+                                        <rect key="frame" x="152" y="160" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="listCancelled:" destination="bpF-aI-eQx" eventType="touchUpInside" id="Hge-hZ-ZYg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MDe-Yq-2Yt" secondAttribute="trailing" constant="40" id="F6O-ma-WwN"/>
+                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="centerX" secondItem="63x-ey-o4E" secondAttribute="centerX" id="P1L-oa-7Da"/>
+                                    <constraint firstItem="jEV-CZ-DMR" firstAttribute="leading" secondItem="63x-ey-o4E" secondAttribute="leading" constant="40" id="Y0r-VO-RNC"/>
+                                    <constraint firstItem="jEV-CZ-DMR" firstAttribute="top" secondItem="QCD-Ot-aEn" secondAttribute="bottom" constant="25" id="d5Y-gS-3pp"/>
+                                    <constraint firstAttribute="height" constant="220" id="eWN-jf-tip"/>
+                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="centerY" secondItem="63x-ey-o4E" secondAttribute="centerY" constant="10" id="fTd-U8-zWU"/>
+                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="top" secondItem="gM8-1W-Zfi" secondAttribute="bottom" constant="25" id="gYY-uq-PxS"/>
+                                    <constraint firstItem="MDe-Yq-2Yt" firstAttribute="top" secondItem="QCD-Ot-aEn" secondAttribute="bottom" constant="25" id="hWM-GC-ebd"/>
+                                    <constraint firstItem="gM8-1W-Zfi" firstAttribute="centerX" secondItem="63x-ey-o4E" secondAttribute="centerX" id="i46-Zj-CeL"/>
+                                    <constraint firstAttribute="width" constant="240" id="yCa-8r-bXJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="63x-ey-o4E" firstAttribute="centerY" secondItem="wkk-sm-AAy" secondAttribute="centerY" id="0ld-rO-BpI"/>
+                            <constraint firstItem="63x-ey-o4E" firstAttribute="centerX" secondItem="wkk-sm-AAy" secondAttribute="centerX" id="PuP-T3-U70"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e6M-9N-GGc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DnE-gp-zQj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-783.20000000000005" y="802.848575712144"/>
+        </scene>
+        <!--Reset Tasks View Controller-->
+        <scene sceneID="PyC-aE-MfS">
+            <objects>
+                <viewController storyboardIdentifier="resetTasksPopUpID" id="Yal-wt-EGl" userLabel="Reset Tasks View Controller" customClass="ResetTasksViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xU7-o5-79K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXy-MT-tXw">
+                                <rect key="frame" x="67" y="273" width="240" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you want to reset your tasks?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQW-1i-0KL">
+                                        <rect key="frame" x="20" y="18" width="200" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNh-gM-VAn">
+                                        <rect key="frame" x="50" y="75" width="30" height="30"/>
+                                        <state key="normal" title="Yes"/>
+                                        <connections>
+                                            <action selector="yesPressed:" destination="Yal-wt-EGl" eventType="touchUpInside" id="zuZ-aj-5Xt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pM-gH-fIk">
+                                        <rect key="frame" x="160" y="75" width="30" height="30"/>
+                                        <state key="normal" title="No"/>
+                                        <connections>
+                                            <action selector="noPressed:" destination="Yal-wt-EGl" eventType="touchUpInside" id="6N4-1X-rdP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="6tF-aW-XKv"/>
+                                    <constraint firstAttribute="height" constant="120" id="HEK-6O-XVj"/>
+                                    <constraint firstItem="eNh-gM-VAn" firstAttribute="leading" secondItem="oXy-MT-tXw" secondAttribute="leading" constant="50" id="o2f-s6-BKG"/>
+                                    <constraint firstAttribute="bottom" secondItem="eNh-gM-VAn" secondAttribute="bottom" constant="15" id="uTE-4d-fAe"/>
+                                    <constraint firstAttribute="bottom" secondItem="1pM-gH-fIk" secondAttribute="bottom" constant="15" id="xkU-ua-You"/>
+                                    <constraint firstAttribute="trailing" secondItem="1pM-gH-fIk" secondAttribute="trailing" constant="50" id="xpu-cb-Cs5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oXy-MT-tXw" firstAttribute="centerX" secondItem="xU7-o5-79K" secondAttribute="centerX" id="LLw-rw-SfT"/>
+                            <constraint firstItem="oXy-MT-tXw" firstAttribute="centerY" secondItem="xU7-o5-79K" secondAttribute="centerY" id="syV-eN-Gu2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gAm-x5-vLT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="snu-Eu-jfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-783" y="-750"/>
+        </scene>
+        <!--Signing Out View Controller-->
+        <scene sceneID="tcm-Ag-Qim">
+            <objects>
+                <viewController storyboardIdentifier="signOutPopUpID" id="ozS-JG-cZd" customClass="SigningOutViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DTe-PO-1qH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ee0-hW-PYg">
+                                <rect key="frame" x="67" y="273" width="240" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you want to sign out?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFh-tE-48d">
+                                        <rect key="frame" x="20" y="18" width="200" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGT-uL-jsA">
+                                        <rect key="frame" x="40" y="75" width="60" height="30"/>
+                                        <state key="normal" title="Sign Out"/>
+                                        <connections>
+                                            <action selector="signOutPressed:" destination="ozS-JG-cZd" eventType="touchUpInside" id="oxZ-I5-J8c"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Rk-RrO">
+                                        <rect key="frame" x="152" y="75" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="ozS-JG-cZd" eventType="touchUpInside" id="VsG-jz-cTc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="AuO-1E-MCR"/>
+                                    <constraint firstAttribute="bottom" secondItem="TGT-uL-jsA" secondAttribute="bottom" constant="15" id="Cml-Tk-fdH"/>
+                                    <constraint firstItem="TGT-uL-jsA" firstAttribute="leading" secondItem="ee0-hW-PYg" secondAttribute="leading" constant="40" id="bd1-Cm-sxV"/>
+                                    <constraint firstAttribute="bottom" secondItem="2XY-Rk-RrO" secondAttribute="bottom" constant="15" id="hXc-z4-DR8"/>
+                                    <constraint firstAttribute="width" constant="240" id="jfe-eT-G0y"/>
+                                    <constraint firstAttribute="trailing" secondItem="2XY-Rk-RrO" secondAttribute="trailing" constant="40" id="t0q-ai-b6a"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ee0-hW-PYg" firstAttribute="centerY" secondItem="DTe-PO-1qH" secondAttribute="centerY" id="u64-UL-SJI"/>
+                            <constraint firstItem="ee0-hW-PYg" firstAttribute="centerX" secondItem="DTe-PO-1qH" secondAttribute="centerX" id="yak-u3-y66"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Imo-b1-Wmy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UmW-ET-ZzB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="803"/>
         </scene>
     </scenes>
     <resources>
@@ -557,6 +833,6 @@
         <image name="typicons_2-0-7_arrow-back_50_0_000000_none" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NrE-1c-YOd"/>
+        <segue reference="Zae-ld-nXt"/>
     </inferredMetricsTieBreakers>
 </document>

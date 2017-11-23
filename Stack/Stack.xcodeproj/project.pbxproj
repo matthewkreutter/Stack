@@ -22,6 +22,10 @@
 		FDB58E9D1FC3D905003021F2 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB58E9C1FC3D905003021F2 /* TodayViewController.swift */; };
 		FDB58EA01FC3D905003021F2 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB58E9E1FC3D905003021F2 /* MainInterface.storyboard */; };
 		FDB58EA41FC3D905003021F2 /* Stack Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FDB58E971FC3D905003021F2 /* Stack Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FDB8B1F71FC66FB9001F8BAE /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */; };
+		FDB8B1F91FC67A11001F8BAE /* ResetSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */; };
+		FDB8B1FB1FC67EE6001F8BAE /* ResetTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */; };
+		FDB8B2011FC68394001F8BAE /* SigningOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B2001FC68394001F8BAE /* SigningOutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,10 @@
 		FDB58E9C1FC3D905003021F2 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		FDB58E9F1FC3D905003021F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		FDB58EA11FC3D905003021F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetSettingsViewController.swift; sourceTree = "<group>"; };
+		FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTasksViewController.swift; sourceTree = "<group>"; };
+		FDB8B2001FC68394001F8BAE /* SigningOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningOutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +163,10 @@
 				2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */,
 				FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */,
 				FDACEF951FC352FE00C50BDF /* SettingViewController.swift */,
+				FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */,
+				FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */,
+				FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */,
+				FDB8B2001FC68394001F8BAE /* SigningOutViewController.swift */,
 				2ECA3B261FC0D343004EBB85 /* Task.swift */,
 			);
 			path = Stack;
@@ -364,8 +376,12 @@
 			files = (
 				2ECA3B271FC0D343004EBB85 /* Task.swift in Sources */,
 				2E4B4EF81FB643D600D8FBFD /* ViewController.swift in Sources */,
+				FDB8B1F71FC66FB9001F8BAE /* AddListViewController.swift in Sources */,
+				FDB8B1FB1FC67EE6001F8BAE /* ResetTasksViewController.swift in Sources */,
 				FD5BB6C11FC1FCA4007FE558 /* EditTaskViewController.swift in Sources */,
+				FDB8B2011FC68394001F8BAE /* SigningOutViewController.swift in Sources */,
 				2ECA3B251FC0D30F004EBB85 /* AddTaskViewController.swift in Sources */,
+				FDB8B1F91FC67A11001F8BAE /* ResetSettingsViewController.swift in Sources */,
 				2E4B4EF61FB643D600D8FBFD /* AppDelegate.swift in Sources */,
 				FDACEF961FC352FE00C50BDF /* SettingViewController.swift in Sources */,
 			);
