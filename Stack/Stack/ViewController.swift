@@ -17,9 +17,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var filterLabel: UILabel!
     @IBOutlet weak var newListOutlet: UIButton!
     @IBOutlet weak var dueDateOutlet: UIButton!
+    @IBOutlet weak var listTypeLabel: UILabel!
+    
     var tasks: [String] = []
     var taskTypes: [String] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

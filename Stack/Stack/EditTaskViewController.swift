@@ -48,20 +48,6 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderField.inputView = reminderView
     }
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if (textField == categoryField) {
-//            let toolBar = UIToolbar()
-//            toolBar.barStyle = .default
-//            toolBar.isTranslucent = true
-//            toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-//            toolBar.sizeToFit()
-//            let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(EditTaskViewController.donePickerClick))
-//            toolBar.setItems([doneButton], animated: false)
-//            toolBar.isUserInteractionEnabled = true
-//            categoryField.inputAccessoryView = toolBar
-//        }
-//    }
-    
     func createDatePicker() {
         datePicker.datePickerMode = .date
         let toolBar = UIToolbar()
@@ -135,7 +121,6 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 return reminderNumOption[row]
             }
             else if (component == 1){
-                let num = reminderView.selectedRow(inComponent: 0)
                 return reminderOption[row]
             }
         }

@@ -121,7 +121,6 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 return reminderNumOption[row]
             }
             else if (component == 1){
-                let num = reminderView.selectedRow(inComponent: 0)
                 return reminderOption[row]
             }
         }

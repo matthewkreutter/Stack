@@ -204,6 +204,7 @@
                         <outlet property="dueDateOutlet" destination="x0E-al-f3n" id="bQj-iM-E8T"/>
                         <outlet property="filterLabel" destination="TUI-GC-L0p" id="1Vs-r4-jbZ"/>
                         <outlet property="listLabel" destination="M36-yR-oIC" id="8Ad-dW-4vw"/>
+                        <outlet property="listTypeLabel" destination="BtW-mr-1HF" id="uLf-pc-CWY"/>
                         <outlet property="menuLeadingConstraint" destination="L7J-4y-xvi" id="XPm-Xz-yb2"/>
                         <outlet property="menuStackView" destination="xgs-z7-aZT" id="QfY-RS-cdS"/>
                         <outlet property="newListOutlet" destination="xDp-wj-NAi" id="F6N-Fu-lma"/>
