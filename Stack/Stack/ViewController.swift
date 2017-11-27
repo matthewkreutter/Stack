@@ -101,13 +101,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "editTaskSegue", sender: self)
+        if menuIsHidden {
+            performSegue(withIdentifier: "editTaskSegue", sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.text = tasks[indexPath.row]
-        cell.textLabel?.textColor = UIColor.white
+        //FIXME change to FireBase
+        cell.textLabel?.textColor = UIColor.black
         return cell
     }
     

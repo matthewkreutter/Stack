@@ -1,5 +1,5 @@
 Ordered by importance:
-[ ] Integrate Firebase to store/retrieve data
+[ ] Integrate Firebase to store/retrieve data (assign unique number ID and password to each iPhone, store in User Defaults, auto login)
 [ ] Implement priority ordering (set different ordering options too)
 [ ] Make filters work (add filters, etc.)
 [ ] Add "done" buttons to picker views
