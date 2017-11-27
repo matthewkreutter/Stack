@@ -144,7 +144,7 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             if textColorOption[row] == "Grey" {
                 textColorField.backgroundColor = UIColor.gray
             }
-            //textColorField.textColor = UIColor.white
+            textColorField.textColor = UIColor.white
             if textColorOption[row] == "White" {
                 textColorField.textColor = UIColor.black
             }
