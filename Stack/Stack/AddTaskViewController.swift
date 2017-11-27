@@ -161,21 +161,14 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
-//        if ((taskName.text?.isEmpty)! || (category.text?.isEmpty)! || (importance.text?.isEmpty)! || (date.text?.isEmpty)! || (time.text?.isEmpty)! || (reminder.text?.isEmpty)!) {
-//
-//            // alert for fields not filled
-//            let alert = UIAlertController(title: "Error", message: "Please make sure all fields are filled!", preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        else if (self.groupNamesPicker == [""]){
-//            let alert = UIAlertController(title: "Error", message: "You are not in any groups! Please add groups from the Groups Tab before requesting a task.", preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
+        if ((taskName.text?.isEmpty)! || taskName.text == "Task Name") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a task name!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         
-//        else {
+        else {
             // push new task to database
             let newTask = [
                 "name": taskName.text as Any,
@@ -189,11 +182,11 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.db.child("tasks").childByAutoId().setValue(newTask)
             
             // alert for SUCCESS
-            let alert = UIAlertController(title: "Task Posted!", message: "You will be notified when a user accepts.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Task Posted!", message: "Temporary message", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-//        }
-        
+        }
+    
 
     }
 }
