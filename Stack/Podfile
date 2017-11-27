@@ -6,6 +6,7 @@ target 'Stack' do
   use_frameworks!
 
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
   # Pods for Stack
 
   target 'StackTests' do

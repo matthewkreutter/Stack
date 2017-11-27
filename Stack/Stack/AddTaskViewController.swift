@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -29,12 +30,15 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let importanceView = UIPickerView()
     let reminderView = UIPickerView()
     
+    var db: DatabaseReference!
+    
     override func viewDidLoad() {
         if let myTasks = UserDefaults.standard.array(forKey: "tasks") {
             tasks = myTasks as! [String]
         }
         createDatePicker()
         createTimePicker()
+        db = Database.database().reference()
 
         categoryView.delegate = self
         categoryView.dataSource = self
@@ -156,9 +160,39 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
-        //tasks.append(Task(name: taskName.text!, category: category.text!, importance: importance.text!, date: date.text!, time: time.text!, reminder: reminder.text!)
-        //tasks.append(Task(name: "test", category: "test", importance: "test", date: "test", time: "test", reminder: "test"))
-        tasks.append(taskName.text!)
-        UserDefaults.standard.set(tasks, forKey: "tasks")
+//        if ((taskName.text?.isEmpty)! || (category.text?.isEmpty)! || (importance.text?.isEmpty)! || (date.text?.isEmpty)! || (time.text?.isEmpty)! || (reminder.text?.isEmpty)!) {
+//
+//            // alert for fields not filled
+//            let alert = UIAlertController(title: "Error", message: "Please make sure all fields are filled!", preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//
+//        else if (self.groupNamesPicker == [""]){
+//            let alert = UIAlertController(title: "Error", message: "You are not in any groups! Please add groups from the Groups Tab before requesting a task.", preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+        
+//        else {
+            // push new task to database
+            let newTask = [
+                "name": taskName.text as Any,
+                "category": category.text as Any,
+                "importance": importance.text as Any,
+                "date": date.text as Any,
+                "time": time.text as Any,
+                "reminder": reminder.text as Any,
+                ] as [String: Any]
+            
+            self.db.child("tasks").childByAutoId().setValue(newTask)
+            
+            // alert for SUCCESS
+            let alert = UIAlertController(title: "Task Posted!", message: "You will be notified when a user accepts.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+//        }
+        
+
     }
 }
