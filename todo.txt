@@ -1,0 +1,9 @@
+Ordered by importance:
+[ ] Integrate Firebase to store/retrieve data
+[ ] Implement priority ordering (set different ordering options too)
+[ ] Make filters work (add filters, etc.)
+[ ] Add "done" buttons to picker views
+[ ] Widget (lock screen push notification?)
+[ ] Siri integration (very specific wording to add/edit/remove a task?)
+[ ] Drag and move tasks to reorder
+[ ] Implement something to make the slide-in menu more visible when it pops over tasks

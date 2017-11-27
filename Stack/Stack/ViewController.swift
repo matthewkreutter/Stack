@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var newListOutlet: UIButton!
     @IBOutlet weak var dueDateOutlet: UIButton!
     @IBOutlet weak var listTypeLabel: UILabel!
+    @IBOutlet weak var tableLeadingConstraint: NSLayoutConstraint!
     
     var tasks: [String] = []
     var taskTypes: [String] = []
@@ -26,6 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
@@ -67,7 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func showMenu() {
         menuLeadingConstraint.constant = 16
-        menuStackView.backgroundColor = UIColor.gray
+        tableLeadingConstraint.constant += 120
         menuIsHidden = false
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
@@ -76,6 +78,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func hideMenu() {
         menuLeadingConstraint.constant = -100
+        tableLeadingConstraint.constant -= 120
         menuIsHidden = true
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
