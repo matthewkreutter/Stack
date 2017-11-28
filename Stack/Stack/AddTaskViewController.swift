@@ -199,7 +199,8 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 "reminder": reminder.text as Any,
                 ] as [String: Any]
             
-            self.db.child("tasks").childByAutoId().setValue(newTask)
+            let myTaskString = "tasks-" + String(UserDefaults.standard.integer(forKey: "userID"))
+            self.db.child(myTaskString).childByAutoId().setValue(newTask)
             
             // alert for SUCCESS
             let alert = UIAlertController(title: "Task Posted!", message: "Temporary message", preferredStyle: UIAlertControllerStyle.alert)
