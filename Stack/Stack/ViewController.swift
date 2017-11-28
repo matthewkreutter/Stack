@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
@@ -22,11 +24,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var tasks: [String] = []
     var taskTypes: [String] = []
+    var userID: Int = -1
+    var db: DatabaseReference!
+    var userCountKey = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        db = Database.database().reference()
+        
+        if (userAlreadyExists()) {
+            userID = UserDefaults.standard.integer(forKey: "userID")
+        } else {
+            let userCountRef = db.child("userCount")
+            userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+                for child in snapshot.children{
+                    let userCount = (child as AnyObject).key!
+                    self.userCountKey.append(userCount)
+                }
+                
+                for item in self.userCountKey {
+                    self.db.child("userCount/\(item)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        var numUsers = (value?["userCount"] as? Int)!
+                        numUsers = numUsers + 1
+                        UserDefaults.standard.set(numUsers, forKey: "userID")
+                        let resetUserCount = ["userCount": numUsers] as [String: Any]
+                        self.db.child("userCount").child(self.userCountKey[0]).setValue(resetUserCount)
+                    })
+                }
+            })
+        }
         
         // Do any additional setup after loading the view, typically from a nib.
         self.view.bringSubview(toFront: menuStackView)
@@ -34,6 +63,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
         menuStackView.setCustomSpacing(15.0, after: newListOutlet)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
+    }
+    
+    func userAlreadyExists() -> Bool {
+        return UserDefaults.standard.object(forKey: "userID") != nil
     }
     
     override func didReceiveMemoryWarning() {
