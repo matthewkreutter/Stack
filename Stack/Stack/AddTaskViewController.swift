@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var category: UITextField!
@@ -37,6 +37,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let myTasks = UserDefaults.standard.array(forKey: "tasks") {
             tasks = myTasks as! [String]
         }
+        createPicker()
         createDatePicker()
         createTimePicker()
         db = Database.database().reference()
@@ -50,7 +51,25 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         reminderView.delegate = self
         reminderView.dataSource = self
         reminder.inputView = reminderView
-        
+        taskName.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        taskName.resignFirstResponder()
+        return true
+    }
+    
+    func createPicker() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePickerPressed))
+        toolBar.setItems([doneButton], animated: false)
+        category.inputAccessoryView = toolBar
+        category.inputView = categoryView
+        importance.inputAccessoryView = toolBar
+        importance.inputView = importanceView
+        reminder.inputAccessoryView = toolBar
+        reminder.inputView = reminderView
     }
     
     func createDatePicker() {
@@ -86,6 +105,10 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
         time.text = timeFormatter.string(from: timePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    @objc func donePickerPressed() {
         self.view.endEditing(true)
     }
     
@@ -135,11 +158,9 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == categoryView {
             category.text = categoryOption[row]
-            category.endEditing(true)
         }
         else if pickerView == importanceView {
             importance.text = importanceOption[row]
-            importance.endEditing(true)
         }
         else if pickerView == reminderView {
             let num = reminderView.selectedRow(inComponent: 0)
@@ -147,7 +168,6 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let number = reminderNumOption[num]
             let numberType = reminderOption[numType]
             reminder.text = number + " " + numberType
-            reminder.endEditing(true)
         }
     }
     

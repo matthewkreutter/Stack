@@ -35,6 +35,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createPicker()
         createDatePicker()
         createTimePicker()
         categoryView.delegate = self
@@ -45,6 +46,25 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         importanceField.inputView = importanceView
         reminderView.delegate = self
         reminderView.dataSource = self
+        reminderField.inputView = reminderView
+        taskNameField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        taskNameField.resignFirstResponder()
+        return true
+    }
+    
+    func createPicker() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePickerPressed))
+        toolBar.setItems([doneButton], animated: false)
+        categoryField.inputAccessoryView = toolBar
+        categoryField.inputView = categoryView
+        importanceField.inputAccessoryView = toolBar
+        importanceField.inputView = importanceView
+        reminderField.inputAccessoryView = toolBar
         reminderField.inputView = reminderView
     }
     
@@ -81,6 +101,10 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
         timeField.text = timeFormatter.string(from: timePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    @objc func donePickerPressed() {
         self.view.endEditing(true)
     }
     
@@ -130,11 +154,9 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == categoryView {
             categoryField.text = categoryOption[row]
-            categoryField.endEditing(true)
         }
         else if pickerView == importanceView {
             importanceField.text = importanceOption[row]
-            importanceField.endEditing(true)
         }
         else if pickerView == reminderView {
 
@@ -143,7 +165,6 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             let number = reminderNumOption[num]
             let numberType = reminderOption[numType]
             reminderField.text = number + " " + numberType
-            reminderField.endEditing(true)
         }
     }
     
