@@ -97,8 +97,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let userCount = (child as AnyObject).key!
                 self.taskIDs.append(userCount)
             }
+            self.tableView.reloadData()
         })
-        tableView.reloadData()
     }
     
     func userAlreadyExists() -> Bool {
@@ -177,7 +177,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.text = taskIDs[indexPath.row]
         print("test")
-        //FIXME change to FireBase
         return cell
     }
     
