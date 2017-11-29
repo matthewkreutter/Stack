@@ -140,6 +140,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         newListPopUp.didMove(toParentViewController: self)
         hideMenu()
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
             guard let touchPoint = touches.first?.view else { return }
@@ -182,7 +183,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask")
         cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
         return cell
