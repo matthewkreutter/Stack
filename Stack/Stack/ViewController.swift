@@ -45,8 +45,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var db: DatabaseReference!
     var userCountKey = [String]()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -80,7 +78,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
         
-        // Do any additional setup after loading the view, typically from a nib.
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
@@ -154,10 +151,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //loadTasks()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskIDs.count
     }
@@ -176,14 +169,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.textColor = UIColor.black
         cell.textLabel?.text = taskIDs[indexPath.row]
-        print("test")
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
+            //FIXME delete from Firebase
             taskIDs.remove(at: indexPath.row)
-            //FIXME Delete from FireBase
             tableView.reloadData()
         }
     }
