@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var listTypeLabel: UILabel!
     @IBOutlet weak var tableLeadingConstraint: NSLayoutConstraint!
     
-    var tasks: [String] = []
+    var taskIDs = [String]()
     var taskTypes: [String] = []
     var userID: Int = -1
     var db: DatabaseReference!
@@ -36,12 +36,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (userAlreadyExists()) {
             userID = UserDefaults.standard.integer(forKey: "userID")
+            loadTasks()
         } else {
             let userCountRef = db.child("userCount")
             userCountRef.observeSingleEvent(of: .value, with: { snapshot in
                 for child in snapshot.children{
                     let userCount = (child as AnyObject).key!
                     self.userCountKey.append(userCount)
+                    print("test1")
                 }
                 
                 for item in self.userCountKey {
@@ -50,6 +52,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         var numUsers = (value?["userCount"] as? Int)!
                         numUsers = numUsers + 1
                         UserDefaults.standard.set(numUsers, forKey: "userID")
+                        self.userID = numUsers
                         let resetUserCount = ["userCount": numUsers] as [String: Any]
                         self.db.child("userCount").child(self.userCountKey[0]).setValue(resetUserCount)
                     })
@@ -63,6 +66,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
         menuStackView.setCustomSpacing(15.0, after: newListOutlet)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
+    }
+    
+    func loadTasks() {
+        let userCountRef = db.child("tasks-" + String(userID))
+        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children{
+                let userCount = (child as AnyObject).key!
+                self.taskIDs.append(userCount)
+                print("test")
+            }
+        })
     }
     
     func userAlreadyExists() -> Bool {
@@ -120,13 +134,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         if let myTasks = UserDefaults.standard.array(forKey: "tasks") {
-            tasks = myTasks as! [String]
+            taskIDs = myTasks as! [String]
         }
         tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return taskIDs.count
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -141,7 +155,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = tasks[indexPath.row]
+        print("Hello")
+        cell.textLabel?.text = taskIDs[indexPath.row]
         //FIXME change to FireBase
         cell.textLabel?.textColor = UIColor.black
         return cell
@@ -149,8 +164,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            tasks.remove(at: indexPath.row)
-            UserDefaults.standard.set(tasks, forKey: "tasks")
+            taskIDs.remove(at: indexPath.row)
+            UserDefaults.standard.set(taskIDs, forKey: "tasks")
             tableView.reloadData()
         }
     }
@@ -160,7 +175,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let taskIndex = tableView.indexPathForSelectedRow?.row,
             let send = sender as? Task {
             clickedTask.category = send.category
-            clickedTask.taskName = tasks[taskIndex]
+            clickedTask.taskName = taskIDs[taskIndex]
         }
     }
     

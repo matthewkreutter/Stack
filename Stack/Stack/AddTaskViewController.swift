@@ -207,7 +207,5 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-    
-
     }
 }
