@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             let userCountRef = db.child("userCount")
             userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-                for child in snapshot.children{
+                for child in snapshot.children {
                     let userCount = (child as AnyObject).key!
                     self.userCountKey.append(userCount)
                     UserDefaults.standard.set("White", forKey: "backgroundColor")
@@ -88,12 +88,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func loadTasks() {
-        let userCountRef = db.child("tasks-" + String(userID))
+        let taskListString = "tasks-" + String(userID)
+        let userCountRef = db.child(taskListString)
         userCountRef.observeSingleEvent(of: .value, with: { snapshot in
             for child in snapshot.children{
-                let userCount = (child as AnyObject).key!
-                self.taskIDs.append(userCount)
+                let taskID = (child as AnyObject).key!
+                self.taskIDs.append(taskID)
             }
+            
+            for id in self.taskIDs {
+                self.db.child(taskListString + "/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    let name = (value?["name"] as? String)!
+                    print(name)
+                })
+            }
+            
             self.tableView.reloadData()
         })
     }
