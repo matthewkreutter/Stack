@@ -25,11 +25,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         super.viewDidLoad()
         taskTable.dataSource = self
         taskTable.delegate = self
+        /*
         db = Database.database().reference()
         if (userAlreadyExists()) {
             userID = UserDefaults.standard.integer(forKey: "userID")
             loadTasks()
         }
+        */
     }
     
     func loadTasks() {
@@ -48,13 +50,15 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskIDs.count
+        //return taskIDs.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask")
         cell.textLabel?.textColor = UIColor.black
-        cell.textLabel?.text = taskIDs[indexPath.row]
+        //cell.textLabel?.text = taskIDs[indexPath.row]
+        cell.textLabel?.text = "Hi"
         return cell
     }
     
