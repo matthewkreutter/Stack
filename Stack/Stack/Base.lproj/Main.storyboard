@@ -533,13 +533,6 @@
                                     <action selector="resetSettingsPressed:" destination="3Ii-8v-wXv" eventType="touchUpInside" id="yZP-1q-WKf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fx-8r-oDX">
-                                <rect key="frame" x="157.5" y="593.5" width="60" height="30"/>
-                                <state key="normal" title="Sign Out"/>
-                                <connections>
-                                    <action selector="signOutPressed:" destination="3Ii-8v-wXv" eventType="touchUpInside" id="sp6-QU-YMV"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KD-YS-DRV">
                                 <rect key="frame" x="226.5" y="543.5" width="82" height="30"/>
                                 <state key="normal" title="Reset Tasks"/>
@@ -551,13 +544,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VZI-hv-WfU" firstAttribute="trailing" secondItem="V5B-mC-R9M" secondAttribute="trailing" constant="40" id="9Pu-9S-ZmA"/>
-                            <constraint firstItem="4fx-8r-oDX" firstAttribute="centerX" secondItem="jrv-3B-xyg" secondAttribute="centerX" id="DhS-By-zrK"/>
                             <constraint firstItem="4KD-YS-DRV" firstAttribute="centerY" secondItem="jrv-3B-xyg" secondAttribute="centerY" constant="225" id="MXL-Ao-x1R"/>
                             <constraint firstItem="4KD-YS-DRV" firstAttribute="centerX" secondItem="jrv-3B-xyg" secondAttribute="centerX" constant="80" id="PQy-R3-Cz0"/>
                             <constraint firstItem="VZI-hv-WfU" firstAttribute="trailing" secondItem="CGP-Ot-3ED" secondAttribute="trailing" constant="40" id="QUl-XE-8WT"/>
                             <constraint firstItem="8lC-Cm-alT" firstAttribute="top" secondItem="Wz6-zX-iAd" secondAttribute="bottom" constant="35" id="SnV-Va-tU9"/>
                             <constraint firstItem="Wz6-zX-iAd" firstAttribute="leading" secondItem="VZI-hv-WfU" secondAttribute="leading" constant="15" id="agu-Fb-x4D"/>
-                            <constraint firstItem="4fx-8r-oDX" firstAttribute="centerY" secondItem="jrv-3B-xyg" secondAttribute="centerY" constant="275" id="eFg-cX-F1K"/>
                             <constraint firstItem="V5B-mC-R9M" firstAttribute="top" secondItem="CGP-Ot-3ED" secondAttribute="bottom" constant="35" id="jPS-3p-NLv"/>
                             <constraint firstItem="CGP-Ot-3ED" firstAttribute="height" secondItem="Wz6-zX-iAd" secondAttribute="height" id="lzC-J8-1a2"/>
                             <constraint firstItem="Zo2-UB-dQ0" firstAttribute="centerX" secondItem="jrv-3B-xyg" secondAttribute="centerX" constant="-80" id="mrH-7f-Oys"/>
@@ -776,68 +767,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snu-Eu-jfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-783" y="-750"/>
-        </scene>
-        <!--Signing Out View Controller-->
-        <scene sceneID="tcm-Ag-Qim">
-            <objects>
-                <viewController storyboardIdentifier="signOutPopUpID" id="ozS-JG-cZd" customClass="SigningOutViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DTe-PO-1qH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ee0-hW-PYg">
-                                <rect key="frame" x="67" y="273" width="240" height="120"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you want to sign out?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFh-tE-48d">
-                                        <rect key="frame" x="20" y="18" width="200" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGT-uL-jsA">
-                                        <rect key="frame" x="40" y="75" width="60" height="30"/>
-                                        <state key="normal" title="Sign Out"/>
-                                        <connections>
-                                            <action selector="signOutPressed:" destination="ozS-JG-cZd" eventType="touchUpInside" id="oxZ-I5-J8c"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Rk-RrO">
-                                        <rect key="frame" x="152" y="75" width="48" height="30"/>
-                                        <state key="normal" title="Cancel"/>
-                                        <connections>
-                                            <action selector="cancelPressed:" destination="ozS-JG-cZd" eventType="touchUpInside" id="VsG-jz-cTc"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="AuO-1E-MCR"/>
-                                    <constraint firstAttribute="bottom" secondItem="TGT-uL-jsA" secondAttribute="bottom" constant="15" id="Cml-Tk-fdH"/>
-                                    <constraint firstItem="TGT-uL-jsA" firstAttribute="leading" secondItem="ee0-hW-PYg" secondAttribute="leading" constant="40" id="bd1-Cm-sxV"/>
-                                    <constraint firstAttribute="bottom" secondItem="2XY-Rk-RrO" secondAttribute="bottom" constant="15" id="hXc-z4-DR8"/>
-                                    <constraint firstAttribute="width" constant="240" id="jfe-eT-G0y"/>
-                                    <constraint firstAttribute="trailing" secondItem="2XY-Rk-RrO" secondAttribute="trailing" constant="40" id="t0q-ai-b6a"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ee0-hW-PYg" firstAttribute="centerY" secondItem="DTe-PO-1qH" secondAttribute="centerY" id="u64-UL-SJI"/>
-                            <constraint firstItem="ee0-hW-PYg" firstAttribute="centerX" secondItem="DTe-PO-1qH" secondAttribute="centerX" id="yak-u3-y66"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Imo-b1-Wmy"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UmW-ET-ZzB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="33" y="803"/>
         </scene>
     </scenes>
     <resources>

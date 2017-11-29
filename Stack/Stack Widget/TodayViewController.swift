@@ -12,21 +12,40 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataSource, UITableViewDelegate {
         
     @IBOutlet weak var taskTable: UITableView!
-    var tasks = ["Task One", "Task Two", "Task Three"]
+    var taskIDs = [String]()
+    var userID: Int = -1
+    //var db: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         taskTable.dataSource = self
         taskTable.delegate = self
+        userID = UserDefaults.standard.integer(forKey: "userID")
+        loadTasks()
         // Do any additional setup after loading the view from its nib.
     }
     
+    func loadTasks() {
+        //let userCountRef = db.child("tasks-" + String(userID))
+        //userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+        //    for child in snapshot.children{
+        //        let userCount = (child as AnyObject).key!
+        //        self.taskIDs.append(userCount)
+        //    }
+        //})
+        taskTable.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return taskIDs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = tasks[indexPath.row]
+        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.text = taskIDs[indexPath.row]
+        print("test")
+        //FIXME change to FireBase
         return cell
     }
     

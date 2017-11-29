@@ -10,6 +10,23 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+extension UserDefaults {
+    func colorForKey(key: String) -> UIColor? {
+        var color: UIColor?
+        if let colorData = data(forKey: key) {
+            color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
+        }
+        return color
+    }
+    func setColor(color: UIColor?, forKey key: String) {
+        var colorData: NSData?
+        if let color = color {
+            colorData = NSKeyedArchiver.archivedData(withRootObject: color) as NSData?
+        }
+        set(colorData, forKey: key)
+    }
+}
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuStackView: UIStackView!
@@ -28,6 +45,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var db: DatabaseReference!
     var userCountKey = [String]()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -43,7 +62,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 for child in snapshot.children{
                     let userCount = (child as AnyObject).key!
                     self.userCountKey.append(userCount)
-                    print("test1")
+                    UserDefaults.standard.set("White", forKey: "backgroundColor")
+                    UserDefaults.standard.set("Black", forKey: "textColor")
                 }
                 
                 for item in self.userCountKey {
@@ -66,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
         menuStackView.setCustomSpacing(15.0, after: newListOutlet)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
+        UserDefaults.standard.string(forKey: "backgroundColor")
+        self.tableView.reloadData()
     }
     
     func loadTasks() {
@@ -74,9 +96,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             for child in snapshot.children{
                 let userCount = (child as AnyObject).key!
                 self.taskIDs.append(userCount)
-                print("test")
             }
         })
+        tableView.reloadData()
     }
     
     func userAlreadyExists() -> Bool {
@@ -133,10 +155,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let myTasks = UserDefaults.standard.array(forKey: "tasks") {
-            taskIDs = myTasks as! [String]
-        }
-        tableView.reloadData()
+        //loadTasks()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,17 +174,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        print("Hello")
-        cell.textLabel?.text = taskIDs[indexPath.row]
-        //FIXME change to FireBase
         cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.text = taskIDs[indexPath.row]
+        print("test")
+        //FIXME change to FireBase
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             taskIDs.remove(at: indexPath.row)
-            UserDefaults.standard.set(taskIDs, forKey: "tasks")
+            //FIXME Delete from FireBase
             tableView.reloadData()
         }
     }
