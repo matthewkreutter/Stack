@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var userID: Int = -1
     var db: DatabaseReference!
     var userCountKey = [String]()
+    var myTaskDict = [String: Task]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +85,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         menuStackView.setCustomSpacing(15.0, after: newListOutlet)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
         UserDefaults.standard.string(forKey: "backgroundColor")
-        self.tableView.reloadData()
     }
     
     func loadTasks() {
@@ -94,17 +94,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             for child in snapshot.children{
                 let taskID = (child as AnyObject).key!
                 self.taskIDs.append(taskID)
+                self.tableView.reloadData()
             }
             
             for id in self.taskIDs {
                 self.db.child(taskListString + "/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     let name = (value?["name"] as? String)!
-                    print(name)
+                    let category = (value?["category"] as? String)!
+                    let importance = (value?["importance"] as? String)!
+                    let date = (value?["date"] as? String)!
+                    let time = (value?["time"] as? String)!
+                    let reminder = (value?["reminder"] as? String)!
+                    let task = Task(name: name, category: category, importance: importance, date: date, time: time, reminder: reminder)
+                    self.myTaskDict[id] = task
+                    self.tableView.reloadData()
                 })
             }
-            
-            self.tableView.reloadData()
         })
     }
     
@@ -178,7 +184,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.textColor = UIColor.black
-        cell.textLabel?.text = taskIDs[indexPath.row]
+        cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
         return cell
     }
     
