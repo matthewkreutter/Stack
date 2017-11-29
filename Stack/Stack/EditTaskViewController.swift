@@ -16,10 +16,10 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var date: String?
     var time: String?
     var reminder: String?
-    var categoryOption = ["Homework", "Chores", "Errands", "Miscellaneous"]
-    var importanceOption = ["1","2","3","4","5","6","7","8","9","10"]
-    var reminderNumOption = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60",]
-    var reminderOption = ["Minutes","Hours","Days","Weeks"]
+    var categoryOption = ["","Homework", "Chores", "Errands", "Miscellaneous"]
+    var importanceOption = ["","1","2","3","4","5","6","7","8","9","10"]
+    var reminderNumOption = ["","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60",]
+    var reminderOption = ["","Minutes","Hours","Days","Weeks"]
     
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var importanceField: UITextField!
@@ -105,7 +105,25 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     @objc func donePickerPressed() {
-        self.view.endEditing(true)
+        let num = reminderView.selectedRow(inComponent: 0)
+        let numType = reminderView.selectedRow(inComponent: 1)
+        let number = reminderNumOption[num]
+        let numberType = reminderOption[numType]
+        if (number == "" && numberType != "") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a value!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if (number != "" && numberType == "") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a unit!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            self.view.endEditing(true)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -153,18 +171,32 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == categoryView {
-            categoryField.text = categoryOption[row]
+            if (categoryOption[row] != "") {
+                categoryField.text = categoryOption[row]
+            }
+            else {
+                categoryField.text = "Category"
+            }
         }
         else if pickerView == importanceView {
-            importanceField.text = importanceOption[row]
+            if (importanceOption[row] != "") {
+                importanceField.text = importanceOption[row]
+            }
+            else {
+                importanceField.text = "Importance"
+            }
         }
         else if pickerView == reminderView {
-
             let num = reminderView.selectedRow(inComponent: 0)
             let numType = reminderView.selectedRow(inComponent: 1)
             let number = reminderNumOption[num]
             let numberType = reminderOption[numType]
-            reminderField.text = number + " " + numberType
+            if (number != "" && numberType != "") {
+                reminderField.text = number + " " + numberType
+            }
+            else if (number == "" && numberType == "") {
+                reminderField.text = "Reminder"
+            }
         }
     }
     
