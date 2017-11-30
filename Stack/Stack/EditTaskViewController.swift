@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     var taskName: String?
@@ -20,7 +22,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var importanceOption = ["","1","2","3","4","5","6","7","8","9","10"]
     var reminderNumOption = ["","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60",]
     var reminderOption = ["","Minutes","Hours","Days","Weeks"]
-    
+    var db: DatabaseReference!
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var importanceField: UITextField!
     @IBOutlet weak var dateField: UITextField!
@@ -33,6 +35,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     let importanceView = UIPickerView()
     let reminderView = UIPickerView()
     @IBOutlet weak var backgroundView: UIView!
+    let userID = UserDefaults.standard.integer(forKey: "userID")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +52,19 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderView.dataSource = self
         reminderField.inputView = reminderView
         taskNameField.delegate = self
+        db = Database.database().reference()
     }
     
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        db = Database.database().reference()
+//        let taskListString = "tasks-" + String(userID)
+//        let deletedTask = db.child(taskListString).child(taskIDs[indexPath.row])
+//
+//        // Delete the file
+//        deletedTask.removeValue()
+//        taskIDs.remove(at: indexPath.row)
+//        tableView.reloadData()
+    }
     override func viewWillAppear(_ animated: Bool) {
         setColors()
     }

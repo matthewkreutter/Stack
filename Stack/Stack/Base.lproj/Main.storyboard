@@ -409,6 +409,7 @@
                                         <rect key="frame" x="165" y="553" width="45" height="30"/>
                                         <state key="normal" title="Delete"/>
                                         <connections>
+                                            <action selector="deleteButtonPressed:" destination="bZo-1v-wD3" eventType="touchUpInside" id="SSP-P5-g9X"/>
                                             <segue destination="BYZ-38-t0r" kind="show" id="Zae-ld-nXt"/>
                                         </connections>
                                     </button>
