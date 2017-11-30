@@ -10,23 +10,6 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-extension UserDefaults {
-    func colorForKey(key: String) -> UIColor? {
-        var color: UIColor?
-        if let colorData = data(forKey: key) {
-            color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
-        }
-        return color
-    }
-    func setColor(color: UIColor?, forKey key: String) {
-        var colorData: NSData?
-        if let color = color {
-            colorData = NSKeyedArchiver.archivedData(withRootObject: color) as NSData?
-        }
-        set(colorData, forKey: key)
-    }
-}
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuStackView: UIStackView!
@@ -46,10 +29,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var userCountKey = [String]()
     var myTaskDict = [String: Task]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
         db = Database.database().reference()
         
         if (userAlreadyExists()) {
@@ -84,9 +69,99 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
         menuStackView.setCustomSpacing(15.0, after: newListOutlet)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
-        UserDefaults.standard.string(forKey: "backgroundColor")
+        setColors()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setColors()
+    }
+    func setColors() {
+        let cells = self.tableView.visibleCells
+        for cell in cells {
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
+                cell.backgroundColor = UIColor.black
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
+                cell.backgroundColor = UIColor.white
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
+                cell.backgroundColor = UIColor.red
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
+                cell.backgroundColor = UIColor.orange
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
+                cell.backgroundColor = UIColor.yellow
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
+                cell.backgroundColor = UIColor.green
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
+                cell.backgroundColor = UIColor.blue
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
+                cell.backgroundColor = UIColor.purple
+            }
+            if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
+                cell.backgroundColor = UIColor.gray
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+                cell.textLabel?.textColor = UIColor.black
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "White" {
+                cell.textLabel?.textColor = UIColor.white
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+                cell.textLabel?.textColor = UIColor.red
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+                cell.textLabel?.textColor = UIColor.orange
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+                cell.textLabel?.textColor = UIColor.yellow
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+                cell.textLabel?.textColor = UIColor.green
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+                cell.textLabel?.textColor = UIColor.blue
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+                cell.textLabel?.textColor = UIColor.purple
+            }
+            if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+                cell.textLabel?.textColor = UIColor.gray
+            }
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
+            tableView.backgroundColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
+            tableView.backgroundColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
+            tableView.backgroundColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
+            tableView.backgroundColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
+            tableView.backgroundColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
+            tableView.backgroundColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
+            tableView.backgroundColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
+            tableView.backgroundColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
+            tableView.backgroundColor = UIColor.gray
+        }
+    }
+
     func loadTasks() {
         let taskListString = "tasks-" + String(userID)
         let userCountRef = db.child(taskListString)
@@ -141,6 +216,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         hideMenu()
     }
     
+    @IBAction func allTasksListClicked(_ sender: Any) {
+        listTypeLabel.text = "All Tasks"
+    }
+    @IBAction func homeworkClicked(_ sender: Any) {
+        listTypeLabel.text = "Homework"
+//        taskIDs = []
+//        let taskListString = "tasks-" + String(userID)
+//        let homework = taskListString.observe(.value, with: { snapshot in
+//            for child in snapshot.children {
+//                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+//                if childSnapshot.value["Category"] as? String == "Homework" {
+//                    let taskName = snapshot.childSnapshotForPath(child.key).value["name"] as? String
+//                    taskIDs.append(taskName)
+//                }
+//            }
+//        })
+        
+    }
+    
+    @IBAction func choresClicked(_ sender: Any) {
+        listTypeLabel.text = "Chores"
+    }
+    @IBAction func errandsClicked(_ sender: Any) {
+        listTypeLabel.text = "Errands"
+    }
+    @IBAction func miscellaneousClicked(_ sender: Any) {
+        listTypeLabel.text = "Miscellaneous"
+    }
+    
+    @IBAction func allTasksFilterClicked(_ sender: Any) {
+        
+    }
+    
+    @IBAction func importanceClicked(_ sender: Any) {
+        
+    }
+    
+    @IBAction func dueDateClicked(_ sender: Any) {
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
             guard let touchPoint = touches.first?.view else { return }
@@ -183,8 +298,62 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask")
-        cell.textLabel?.textColor = UIColor.black
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
+            cell.backgroundColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
+            cell.backgroundColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
+            cell.backgroundColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
+            cell.backgroundColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
+            cell.backgroundColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
+            cell.backgroundColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
+            cell.backgroundColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
+            cell.backgroundColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
+            cell.backgroundColor = UIColor.gray
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            cell.textLabel?.textColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            cell.textLabel?.textColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            cell.textLabel?.textColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            cell.textLabel?.textColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            cell.textLabel?.textColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            cell.textLabel?.textColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            cell.textLabel?.textColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            cell.textLabel?.textColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            cell.textLabel?.textColor = UIColor.gray
+        }
         cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
         return cell
     }
@@ -192,6 +361,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             //FIXME delete from Firebase
+            // Create a reference to the file to delete
+            db = Database.database().reference()
+            let taskListString = "tasks-" + String(userID)
+            let deletedTask = db.child(taskListString).child(taskIDs[indexPath.row])
+            
+            // Delete the file
+            deletedTask.removeValue()
             taskIDs.remove(at: indexPath.row)
             tableView.reloadData()
         }

@@ -32,6 +32,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     let categoryView = UIPickerView()
     let importanceView = UIPickerView()
     let reminderView = UIPickerView()
+    @IBOutlet weak var backgroundView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,111 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderView.dataSource = self
         reminderField.inputView = reminderView
         taskNameField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setColors()
+    }
+    func setColors() {
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
+            backgroundView.backgroundColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
+            backgroundView.backgroundColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
+            backgroundView.backgroundColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
+            backgroundView.backgroundColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
+            backgroundView.backgroundColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
+            backgroundView.backgroundColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
+            backgroundView.backgroundColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
+            backgroundView.backgroundColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
+            backgroundView.backgroundColor = UIColor.gray
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            importanceField.textColor = UIColor.black
+            categoryField.textColor = UIColor.black
+            reminderField.textColor = UIColor.black
+            dateField.textColor = UIColor.black
+            timeField.textColor = UIColor.black
+            taskNameField.textColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            importanceField.textColor = UIColor.white
+            categoryField.textColor = UIColor.white
+            reminderField.textColor = UIColor.white
+            dateField.textColor = UIColor.white
+            timeField.textColor = UIColor.white
+            taskNameField.textColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            importanceField.textColor = UIColor.red
+            categoryField.textColor = UIColor.red
+            reminderField.textColor = UIColor.red
+            dateField.textColor = UIColor.red
+            timeField.textColor = UIColor.red
+            taskNameField.textColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            importanceField.textColor = UIColor.orange
+            categoryField.textColor = UIColor.orange
+            reminderField.textColor = UIColor.orange
+            dateField.textColor = UIColor.orange
+            timeField.textColor = UIColor.orange
+            taskNameField.textColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            importanceField.textColor = UIColor.yellow
+            categoryField.textColor = UIColor.yellow
+            reminderField.textColor = UIColor.yellow
+            dateField.textColor = UIColor.yellow
+            timeField.textColor = UIColor.yellow
+            taskNameField.textColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            importanceField.textColor = UIColor.green
+            categoryField.textColor = UIColor.green
+            reminderField.textColor = UIColor.green
+            dateField.textColor = UIColor.green
+            timeField.textColor = UIColor.green
+            taskNameField.textColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            importanceField.textColor = UIColor.blue
+            categoryField.textColor = UIColor.blue
+            reminderField.textColor = UIColor.blue
+            dateField.textColor = UIColor.blue
+            timeField.textColor = UIColor.blue
+            taskNameField.textColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            importanceField.textColor = UIColor.purple
+            categoryField.textColor = UIColor.purple
+            reminderField.textColor = UIColor.purple
+            dateField.textColor = UIColor.purple
+            timeField.textColor = UIColor.purple
+            taskNameField.textColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            importanceField.textColor = UIColor.gray
+            categoryField.textColor = UIColor.gray
+            reminderField.textColor = UIColor.gray
+            dateField.textColor = UIColor.gray
+            timeField.textColor = UIColor.gray
+            taskNameField.textColor = UIColor.gray
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

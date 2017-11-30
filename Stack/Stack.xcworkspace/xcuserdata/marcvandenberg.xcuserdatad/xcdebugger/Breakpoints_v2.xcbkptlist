@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stack/ViewController.swift"
-            timestampString = "533671193.36721"
+            timestampString = "533712981.124394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "hideMenu()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stack/ViewController.swift"
-            timestampString = "533671193.367737"
+            timestampString = "533712981.124868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "hideMenu()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

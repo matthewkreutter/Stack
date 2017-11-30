@@ -8,6 +8,7 @@ Ordered by importance:
 [ ] Drag and move tasks to reorder
 [x] Implement something to make the slide-in menu more visible when it pops over tasks
 [x] Make return button work on task name keyboard
-[ ] Task feed is populated with all of own tasks
-[ ] Fix add task picker views (input validation?)
+[x] Task feed is populated with all of own tasks
+[x] Fix add task picker views (input validation?)
 [ ] When click a task, have next page be populated correctly
+[x] Delete tasks from firebase

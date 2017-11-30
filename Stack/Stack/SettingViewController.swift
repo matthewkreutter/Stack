@@ -179,13 +179,11 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == backgroundColorView {
             backgroundColorField.text = backgroundColorOption[row]
-            //UserDefaults.standard.set(backgroundColorField.text, forKey: "backgroundColor")
             UserDefaults.standard.set(backgroundColorOption[row], forKey: "backgroundColor")
             setBackgroundColor()
         }
         else if pickerView == textColorView {
             textColorField.text = textColorOption[row]
-            //UserDefaults.standard.set(textColorField.text, forKey: "textColor")
             UserDefaults.standard.set(textColorOption[row], forKey: "textColor")
             setTextColor()
         }

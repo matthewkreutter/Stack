@@ -101,22 +101,37 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bh3-lT-FL4">
                                         <rect key="frame" x="0.0" y="20.5" width="98" height="30"/>
                                         <state key="normal" title="All Tasks"/>
+                                        <connections>
+                                            <action selector="allTasksListClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Abh-oi-3WJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMC-4J-QAQ">
                                         <rect key="frame" x="0.0" y="50.5" width="98" height="30"/>
                                         <state key="normal" title="Homework"/>
+                                        <connections>
+                                            <action selector="homeworkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z0O-VE-Vjx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNQ-SY-ONs">
                                         <rect key="frame" x="0.0" y="80.5" width="98" height="30"/>
                                         <state key="normal" title="Chores"/>
+                                        <connections>
+                                            <action selector="choresClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yh0-P4-Aya"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5A2-DK-tBB">
                                         <rect key="frame" x="0.0" y="110.5" width="98" height="30"/>
                                         <state key="normal" title="Errands"/>
+                                        <connections>
+                                            <action selector="errandsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tlp-en-aOT"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ib1-YM-uDI">
                                         <rect key="frame" x="0.0" y="140.5" width="98" height="30"/>
                                         <state key="normal" title="Miscellaneous"/>
+                                        <connections>
+                                            <action selector="miscellaneousClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aHq-FW-ibt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDp-wj-NAi">
                                         <rect key="frame" x="0.0" y="170.5" width="98" height="30"/>
@@ -134,14 +149,23 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIb-0f-2iy">
                                         <rect key="frame" x="0.0" y="221" width="98" height="30"/>
                                         <state key="normal" title="All Tasks"/>
+                                        <connections>
+                                            <action selector="allTasksFilterClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XVh-lZ-oAE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOx-5U-oEe">
                                         <rect key="frame" x="0.0" y="251" width="98" height="30"/>
                                         <state key="normal" title="Importance"/>
+                                        <connections>
+                                            <action selector="importanceClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k7S-fu-ORn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0E-al-f3n">
                                         <rect key="frame" x="0.0" y="281" width="98" height="30"/>
                                         <state key="normal" title="Due Date"/>
+                                        <connections>
+                                            <action selector="dueDateClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I0g-HN-20L"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fde-TT-vOc">
                                         <rect key="frame" x="0.0" y="311" width="98" height="30"/>
@@ -177,7 +201,10 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtW-mr-1HF">
-                                <rect key="frame" x="150" y="31" width="75.5" height="24"/>
+                                <rect key="frame" x="63" y="31" width="250" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="YVy-2y-koT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -201,7 +228,6 @@
                             <constraint firstItem="xgs-z7-aZT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-100" id="L7J-4y-xvi"/>
                             <constraint firstItem="olG-zY-Hkt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="OS8-SK-jxd"/>
                             <constraint firstItem="1nP-Fu-RdW" firstAttribute="top" secondItem="olG-zY-Hkt" secondAttribute="bottom" constant="6" id="PDi-48-lkt"/>
-                            <constraint firstItem="olG-zY-Hkt" firstAttribute="leading" secondItem="BtW-mr-1HF" secondAttribute="trailing" constant="107.5" id="ZIg-1W-CGm"/>
                             <constraint firstItem="1nP-Fu-RdW" firstAttribute="top" secondItem="BtW-mr-1HF" secondAttribute="bottom" constant="8" id="dIO-kP-7Ig"/>
                             <constraint firstItem="1nP-Fu-RdW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fXT-Hh-Rej"/>
                             <constraint firstItem="xgs-z7-aZT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="75" id="hTg-5V-AAg"/>
@@ -454,6 +480,7 @@
                         <viewLayoutGuide key="safeArea" id="9dQ-4z-4iB"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="Wc2-GH-TLr" id="HLB-xZ-c5L"/>
                         <outlet property="categoryField" destination="VhG-1Q-2Ol" id="wX4-eD-hgA"/>
                         <outlet property="dateField" destination="AR1-kb-ahs" id="thF-UJ-TdY"/>
                         <outlet property="importanceField" destination="NWd-00-KRK" id="Bx0-5O-ZgT"/>
