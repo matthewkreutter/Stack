@@ -218,9 +218,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func allTasksListClicked(_ sender: Any) {
         listTypeLabel.text = "All Tasks"
+        hideMenu()
     }
     @IBAction func homeworkClicked(_ sender: Any) {
         listTypeLabel.text = "Homework"
+        hideMenu()
 //        taskIDs = []
 //        let taskListString = "tasks-" + String(userID)
 //        let homework = taskListString.observe(.value, with: { snapshot in
@@ -237,24 +239,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func choresClicked(_ sender: Any) {
         listTypeLabel.text = "Chores"
+        hideMenu()
     }
     @IBAction func errandsClicked(_ sender: Any) {
         listTypeLabel.text = "Errands"
+        hideMenu()
     }
     @IBAction func miscellaneousClicked(_ sender: Any) {
         listTypeLabel.text = "Miscellaneous"
+        hideMenu()
     }
     
     @IBAction func allTasksFilterClicked(_ sender: Any) {
-        
+        hideMenu()
     }
     
     @IBAction func importanceClicked(_ sender: Any) {
-        
+        hideMenu()
     }
     
     @IBAction func dueDateClicked(_ sender: Any) {
-        
+        hideMenu()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
