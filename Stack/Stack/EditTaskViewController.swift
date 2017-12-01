@@ -36,6 +36,7 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     let reminderView = UIPickerView()
     @IBOutlet weak var backgroundView: UIView!
     let userID = UserDefaults.standard.integer(forKey: "userID")
+    var task: Task!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,14 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderField.layer.borderWidth = 1.0
         reminderField.layer.borderColor = UIColor.black.cgColor
         reminderField.layer.cornerRadius = 5.0
+        if (task != nil) {
+            taskNameField.text = task.name
+            categoryField.text = task.category
+            importanceField.text = task.importance
+            dateField.text = task.date
+            timeField.text = task.time
+            reminderField.text = task.reminder
+        }
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {

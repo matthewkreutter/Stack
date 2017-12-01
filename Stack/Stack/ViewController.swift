@@ -248,12 +248,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let date = (value?["date"] as? String)!
                     let time = (value?["time"] as? String)!
                     let reminder = (value?["reminder"] as? String)!
-                    let task = Task(name: name, category: category, importance: importance, date: date, time: time, reminder: reminder)
+                    let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder)
                     self.myTaskDict[id] = task
                     self.tableView.reloadData()
                 })
             }
+            //self.tableView.reloadData()
         })
+        //self.tableView.reloadData()
     }
     
     func userAlreadyExists() -> Bool {
@@ -706,7 +708,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask")
+        //let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask") as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "aTask", for: indexPath) as! TableViewCell
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
             cell.backgroundColor = UIColor.black
         }
@@ -762,6 +765,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.textLabel?.textColor = UIColor.gray
         }
         cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
+        if (myTaskDict[taskIDs[indexPath.row]] != nil) {
+            cell.task = Task(id: taskIDs[indexPath.row], name: (myTaskDict[taskIDs[indexPath.row]]?.name)!, category: (myTaskDict[taskIDs[indexPath.row]]?.category)!, importance: (myTaskDict[taskIDs[indexPath.row]]?.importance)!, date: (myTaskDict[taskIDs[indexPath.row]]?.date)!, time: (myTaskDict[taskIDs[indexPath.row]]?.time)!, reminder: (myTaskDict[taskIDs[indexPath.row]]?.reminder)!)
+        }
         return cell
     }
     
@@ -795,11 +801,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let clickedTask = segue.destination as? EditTaskViewController,
-            let taskIndex = tableView.indexPathForSelectedRow?.row,
-            let send = sender as? Task {
-            clickedTask.category = send.category
-            clickedTask.taskName = taskIDs[taskIndex]
+        if let editTaskViewController = segue.destination as? EditTaskViewController,
+        let currentSender = sender as? TableViewCell {
+            editTaskViewController.task = myTaskDict[(currentSender.task?.id)!]
+                //editTaskViewController.category = send.category
+                //editTaskViewController.taskName = taskIDs[taskIndex]
         }
     }
     

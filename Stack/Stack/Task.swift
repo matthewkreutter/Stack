@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 struct Task {
+    var id: String
     var name: String
     var category: String
     var importance: String
