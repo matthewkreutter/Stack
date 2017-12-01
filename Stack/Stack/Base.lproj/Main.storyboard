@@ -135,9 +135,9 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDp-wj-NAi">
                                         <rect key="frame" x="0.0" y="170.5" width="98" height="30"/>
-                                        <state key="normal" title="Add New List"/>
+                                        <state key="normal" title="Completed"/>
                                         <connections>
-                                            <action selector="newListClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kjX-e2-xoq"/>
+                                            <action selector="completedTasksClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xuu-BN-Jbw"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUI-GC-L0p">
@@ -239,13 +239,20 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="allTasksList" destination="bh3-lT-FL4" id="bfR-tI-0T4"/>
+                        <outlet property="choresList" destination="yNQ-SY-ONs" id="DPQ-Uk-d6v"/>
+                        <outlet property="completedTasksList" destination="xDp-wj-NAi" id="AYY-rb-aMT"/>
                         <outlet property="dueDateOutlet" destination="x0E-al-f3n" id="bQj-iM-E8T"/>
+                        <outlet property="errandsList" destination="5A2-DK-tBB" id="mmp-LD-TbN"/>
                         <outlet property="filterLabel" destination="TUI-GC-L0p" id="1Vs-r4-jbZ"/>
+                        <outlet property="homeworkList" destination="AMC-4J-QAQ" id="ZE7-ly-bTR"/>
+                        <outlet property="importanceOutlet" destination="GOx-5U-oEe" id="plF-su-tXn"/>
                         <outlet property="listLabel" destination="M36-yR-oIC" id="8Ad-dW-4vw"/>
                         <outlet property="listTypeLabel" destination="BtW-mr-1HF" id="uLf-pc-CWY"/>
                         <outlet property="menuLeadingConstraint" destination="L7J-4y-xvi" id="XPm-Xz-yb2"/>
                         <outlet property="menuStackView" destination="xgs-z7-aZT" id="QfY-RS-cdS"/>
-                        <outlet property="newListOutlet" destination="xDp-wj-NAi" id="F6N-Fu-lma"/>
+                        <outlet property="miscellaneousList" destination="Ib1-YM-uDI" id="Vrz-XU-P9G"/>
+                        <outlet property="priorityScoreOutlet" destination="QIb-0f-2iy" id="Qwx-YN-BfL"/>
                         <outlet property="tableLeadingConstraint" destination="ra6-4Q-mbJ" id="Kfn-qQ-eRq"/>
                         <outlet property="tableView" destination="1nP-Fu-RdW" id="dfO-HG-0QA"/>
                     </connections>
@@ -656,84 +663,6 @@
             </objects>
             <point key="canvasLocation" x="849" y="32"/>
         </scene>
-        <!--Add List View Controller-->
-        <scene sceneID="022-X2-XdQ">
-            <objects>
-                <viewController storyboardIdentifier="newListPopUpID" id="bpF-aI-eQx" customClass="AddListViewController" customModule="Stack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wkk-sm-AAy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63x-ey-o4E">
-                                <rect key="frame" x="67" y="223" width="240" height="220"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What list would you like to add?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gM8-1W-Zfi">
-                                        <rect key="frame" x="44" y="30" width="152" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="152" id="dQw-1y-Wei"/>
-                                            <constraint firstAttribute="height" constant="50" id="rrk-bu-BAt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-CZ-DMR">
-                                        <rect key="frame" x="40" y="160" width="56" height="30"/>
-                                        <state key="normal" title="Add List"/>
-                                        <connections>
-                                            <action selector="listAdded:" destination="bpF-aI-eQx" eventType="touchUpInside" id="7xv-Pv-Bzg"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCD-Ot-aEn">
-                                        <rect key="frame" x="20" y="105" width="200" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="t1J-rI-zTr"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDe-Yq-2Yt">
-                                        <rect key="frame" x="152" y="160" width="48" height="30"/>
-                                        <state key="normal" title="Cancel"/>
-                                        <connections>
-                                            <action selector="listCancelled:" destination="bpF-aI-eQx" eventType="touchUpInside" id="Hge-hZ-ZYg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="MDe-Yq-2Yt" secondAttribute="trailing" constant="40" id="F6O-ma-WwN"/>
-                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="centerX" secondItem="63x-ey-o4E" secondAttribute="centerX" id="P1L-oa-7Da"/>
-                                    <constraint firstItem="jEV-CZ-DMR" firstAttribute="leading" secondItem="63x-ey-o4E" secondAttribute="leading" constant="40" id="Y0r-VO-RNC"/>
-                                    <constraint firstItem="jEV-CZ-DMR" firstAttribute="top" secondItem="QCD-Ot-aEn" secondAttribute="bottom" constant="25" id="d5Y-gS-3pp"/>
-                                    <constraint firstAttribute="height" constant="220" id="eWN-jf-tip"/>
-                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="centerY" secondItem="63x-ey-o4E" secondAttribute="centerY" constant="10" id="fTd-U8-zWU"/>
-                                    <constraint firstItem="QCD-Ot-aEn" firstAttribute="top" secondItem="gM8-1W-Zfi" secondAttribute="bottom" constant="25" id="gYY-uq-PxS"/>
-                                    <constraint firstItem="MDe-Yq-2Yt" firstAttribute="top" secondItem="QCD-Ot-aEn" secondAttribute="bottom" constant="25" id="hWM-GC-ebd"/>
-                                    <constraint firstItem="gM8-1W-Zfi" firstAttribute="centerX" secondItem="63x-ey-o4E" secondAttribute="centerX" id="i46-Zj-CeL"/>
-                                    <constraint firstAttribute="width" constant="240" id="yCa-8r-bXJ"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="40"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="63x-ey-o4E" firstAttribute="centerY" secondItem="wkk-sm-AAy" secondAttribute="centerY" id="0ld-rO-BpI"/>
-                            <constraint firstItem="63x-ey-o4E" firstAttribute="centerX" secondItem="wkk-sm-AAy" secondAttribute="centerX" id="PuP-T3-U70"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="e6M-9N-GGc"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DnE-gp-zQj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-783.20000000000005" y="802.848575712144"/>
-        </scene>
         <!--Reset Tasks View Controller-->
         <scene sceneID="PyC-aE-MfS">
             <objects>
@@ -804,6 +733,6 @@
         <image name="typicons_2-0-7_arrow-back_50_0_000000_none" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Zae-ld-nXt"/>
+        <segue reference="S1A-yS-F6J"/>
     </inferredMetricsTieBreakers>
 </document>

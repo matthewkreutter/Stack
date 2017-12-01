@@ -10,18 +10,30 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+extension UIColor {
+    static func appleBlue() -> UIColor {
+        return UIColor.init(red: 14.0/255, green: 122.0/255, blue: 254.0/255, alpha: 1.0)
+    }
+}
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuStackView: UIStackView!
     var menuIsHidden = true
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var allTasksList: UIButton!
+    @IBOutlet weak var homeworkList: UIButton!
+    @IBOutlet weak var errandsList: UIButton!
+    @IBOutlet weak var miscellaneousList: UIButton!
+    @IBOutlet weak var choresList: UIButton!
+    @IBOutlet weak var completedTasksList: UIButton!
     @IBOutlet weak var listLabel: UILabel!
     @IBOutlet weak var filterLabel: UILabel!
-    @IBOutlet weak var newListOutlet: UIButton!
     @IBOutlet weak var dueDateOutlet: UIButton!
     @IBOutlet weak var listTypeLabel: UILabel!
+    @IBOutlet weak var priorityScoreOutlet: UIButton!
+    @IBOutlet weak var importanceOutlet: UIButton!
     @IBOutlet weak var tableLeadingConstraint: NSLayoutConstraint!
-    
     var taskIDs = [String]()
     var taskTypes: [String] = []
     var userID: Int = -1
@@ -67,9 +79,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
-        menuStackView.setCustomSpacing(15.0, after: newListOutlet)
+        menuStackView.setCustomSpacing(15.0, after: completedTasksList)
         menuStackView.setCustomSpacing(30.0, after: dueDateOutlet)
+        //self.tableView.isEditing = true
         setColors()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            allTasksList.tintColor = UIColor.black
+            priorityScoreOutlet.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            allTasksList.tintColor = UIColor.white
+            priorityScoreOutlet.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            allTasksList.tintColor = UIColor.red
+            priorityScoreOutlet.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            allTasksList.tintColor = UIColor.orange
+            priorityScoreOutlet.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            allTasksList.tintColor = UIColor.yellow
+            priorityScoreOutlet.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            allTasksList.tintColor = UIColor.green
+            priorityScoreOutlet.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            allTasksList.tintColor = UIColor.blue
+            priorityScoreOutlet.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            allTasksList.tintColor = UIColor.purple
+            priorityScoreOutlet.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            allTasksList.tintColor = UIColor.gray
+            priorityScoreOutlet.tintColor = UIColor.gray
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,59 +256,394 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    @IBAction func newListClicked(_ sender: Any) {
-        let newListPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newListPopUpID") as! AddListViewController
-        self.addChildViewController(newListPopUp)
-        newListPopUp.view.frame = self.view.frame
-        self.view.addSubview(newListPopUp.view)
-        newListPopUp.didMove(toParentViewController: self)
-        hideMenu()
-    }
-    
     @IBAction func allTasksListClicked(_ sender: Any) {
         listTypeLabel.text = "All Tasks"
         hideMenu()
+        taskIDs = []
+        self.tableView.reloadData()
+        loadTasks()
+        homeworkList.tintColor = UIColor.appleBlue()
+        choresList.tintColor = UIColor.appleBlue()
+        errandsList.tintColor = UIColor.appleBlue()
+        miscellaneousList.tintColor = UIColor.appleBlue()
+        completedTasksList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            allTasksList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            allTasksList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            allTasksList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            allTasksList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            allTasksList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            allTasksList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            allTasksList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            allTasksList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            allTasksList.tintColor = UIColor.gray
+        }
     }
     @IBAction func homeworkClicked(_ sender: Any) {
         listTypeLabel.text = "Homework"
         hideMenu()
-//        taskIDs = []
-//        let taskListString = "tasks-" + String(userID)
-//        let homework = taskListString.observe(.value, with: { snapshot in
-//            for child in snapshot.children {
-//                let childSnapshot = snapshot.childSnapshotForPath(child.key)
-//                if childSnapshot.value["Category"] as? String == "Homework" {
-//                    let taskName = snapshot.childSnapshotForPath(child.key).value["name"] as? String
-//                    taskIDs.append(taskName)
-//                }
-//            }
-//        })
-        
+        taskIDs = []
+        self.tableView.reloadData()
+        let taskListString = "tasks-" + String(userID)
+        let userCountRef = db.child(taskListString)
+        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children{
+                let taskID = (child as AnyObject).key!
+                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+                if childSnapshot.value as? String == "Homework" {
+                    self.taskIDs.append(taskID)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        allTasksList.tintColor = UIColor.appleBlue()
+        choresList.tintColor = UIColor.appleBlue()
+        errandsList.tintColor = UIColor.appleBlue()
+        miscellaneousList.tintColor = UIColor.appleBlue()
+        completedTasksList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            homeworkList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            homeworkList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            homeworkList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            homeworkList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            homeworkList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            homeworkList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            homeworkList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            homeworkList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            homeworkList.tintColor = UIColor.gray
+        }
     }
     
     @IBAction func choresClicked(_ sender: Any) {
         listTypeLabel.text = "Chores"
         hideMenu()
+        taskIDs = []
+        self.tableView.reloadData()
+        let taskListString = "tasks-" + String(userID)
+        let userCountRef = db.child(taskListString)
+        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children{
+                let taskID = (child as AnyObject).key!
+                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+                if childSnapshot.value as? String == "Chores" {
+                    self.taskIDs.append(taskID)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        allTasksList.tintColor = UIColor.appleBlue()
+        homeworkList.tintColor = UIColor.appleBlue()
+        errandsList.tintColor = UIColor.appleBlue()
+        miscellaneousList.tintColor = UIColor.appleBlue()
+        completedTasksList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            choresList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            choresList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            choresList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            choresList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            choresList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            choresList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            choresList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            choresList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            choresList.tintColor = UIColor.gray
+        }
     }
     @IBAction func errandsClicked(_ sender: Any) {
         listTypeLabel.text = "Errands"
         hideMenu()
+        taskIDs = []
+        self.tableView.reloadData()
+        let taskListString = "tasks-" + String(userID)
+        let userCountRef = db.child(taskListString)
+        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children{
+                let taskID = (child as AnyObject).key!
+                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+                if childSnapshot.value as? String == "Errands" {
+                    self.taskIDs.append(taskID)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        allTasksList.tintColor = UIColor.appleBlue()
+        choresList.tintColor = UIColor.appleBlue()
+        homeworkList.tintColor = UIColor.appleBlue()
+        miscellaneousList.tintColor = UIColor.appleBlue()
+        completedTasksList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            errandsList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            errandsList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            errandsList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            errandsList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            errandsList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            errandsList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            errandsList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            errandsList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            errandsList.tintColor = UIColor.gray
+        }
     }
     @IBAction func miscellaneousClicked(_ sender: Any) {
         listTypeLabel.text = "Miscellaneous"
         hideMenu()
+        taskIDs = []
+        self.tableView.reloadData()
+        let taskListString = "tasks-" + String(userID)
+        let userCountRef = db.child(taskListString)
+        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+            for child in snapshot.children{
+                let taskID = (child as AnyObject).key!
+                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+                if childSnapshot.value as? String == "Miscellaneous" {
+                    self.taskIDs.append(taskID)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        allTasksList.tintColor = UIColor.appleBlue()
+        choresList.tintColor = UIColor.appleBlue()
+        errandsList.tintColor = UIColor.appleBlue()
+        homeworkList.tintColor = UIColor.appleBlue()
+        completedTasksList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            miscellaneousList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            miscellaneousList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            miscellaneousList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            miscellaneousList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            miscellaneousList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            miscellaneousList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            miscellaneousList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            miscellaneousList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            miscellaneousList.tintColor = UIColor.gray
+        }
     }
     
+    @IBAction func completedTasksClicked(_ sender: Any) {
+        listTypeLabel.text = "Completed Tasks"
+        hideMenu()
+        taskIDs = []
+        self.tableView.reloadData()
+//        let taskListString = "tasks-" + String(userID)
+//        let userCountRef = db.child(taskListString)
+//        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
+//            for child in snapshot.children{
+//                let taskID = (child as AnyObject).key!
+//                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+//                if childSnapshot.value as? String == "Miscellaneous" {
+//                    self.taskIDs.append(taskID)
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        })
+        allTasksList.tintColor = UIColor.appleBlue()
+        choresList.tintColor = UIColor.appleBlue()
+        errandsList.tintColor = UIColor.appleBlue()
+        homeworkList.tintColor = UIColor.appleBlue()
+        miscellaneousList.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            completedTasksList.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            completedTasksList.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            completedTasksList.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            completedTasksList.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            completedTasksList.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            completedTasksList.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            completedTasksList.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            completedTasksList.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            completedTasksList.tintColor = UIColor.gray
+        }
+    }
     @IBAction func allTasksFilterClicked(_ sender: Any) {
         hideMenu()
+        importanceOutlet.tintColor = UIColor.appleBlue()
+        dueDateOutlet.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            priorityScoreOutlet.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            priorityScoreOutlet.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            priorityScoreOutlet.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            priorityScoreOutlet.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            priorityScoreOutlet.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            priorityScoreOutlet.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            priorityScoreOutlet.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            priorityScoreOutlet.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            priorityScoreOutlet.tintColor = UIColor.gray
+        }
     }
     
     @IBAction func importanceClicked(_ sender: Any) {
         hideMenu()
+        priorityScoreOutlet.tintColor = UIColor.appleBlue()
+        dueDateOutlet.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            importanceOutlet.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            importanceOutlet.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            importanceOutlet.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            importanceOutlet.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            importanceOutlet.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            importanceOutlet.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            importanceOutlet.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            importanceOutlet.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            importanceOutlet.tintColor = UIColor.gray
+        }
     }
     
     @IBAction func dueDateClicked(_ sender: Any) {
         hideMenu()
+        priorityScoreOutlet.tintColor = UIColor.appleBlue()
+        importanceOutlet.tintColor = UIColor.appleBlue()
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            dueDateOutlet.tintColor = UIColor.black
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            dueDateOutlet.tintColor = UIColor.white
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            dueDateOutlet.tintColor = UIColor.red
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            dueDateOutlet.tintColor = UIColor.orange
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            dueDateOutlet.tintColor = UIColor.yellow
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            dueDateOutlet.tintColor = UIColor.green
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            dueDateOutlet.tintColor = UIColor.blue
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            dueDateOutlet.tintColor = UIColor.purple
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            dueDateOutlet.tintColor = UIColor.gray
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
@@ -377,6 +761,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tableView.reloadData()
         }
     }
+    
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let movedObject = self.taskIDs[sourceIndexPath.row]
+//        taskIDs.remove(at: sourceIndexPath.row)
+//        taskIDs.insert(movedObject, at: destinationIndexPath.row)
+//        // To check for correctness enable: self.tableView.reloadData()
+//    }
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return .none
+//    }
+//
+//    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let clickedTask = segue.destination as? EditTaskViewController,

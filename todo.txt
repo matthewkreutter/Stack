@@ -1,14 +1,19 @@
 Ordered by importance:
 [x] Integrate Firebase to store/retrieve data (assign unique number ID and password to each iPhone, store in User Defaults, auto login)
-[ ] Implement priority ordering (set different ordering options too)
-[ ] Make filters work (add filters, etc.)
-[x] Add "done" buttons to picker views
-[ ] Widget (lock screen push notification?)
-[ ] Siri integration (very specific wording to add/edit/remove a task?)
-[ ] Drag and move tasks to reorder
 [x] Implement something to make the slide-in menu more visible when it pops over tasks
 [x] Make return button work on task name keyboard
 [x] Task feed is populated with all of own tasks
 [x] Fix add task picker views (input validation?)
-[ ] When click a task, have next page be populated correctly
+[x] Add "done" buttons to picker views
 [x] Delete tasks from firebase
+[x] Make list type filters work (add filters, etc.)
+[x] Drag and move tasks to reorder
+[ ] Implement priority ordering (set different ordering options too)
+[ ] Make sorting type filters work (add filters, etc.)
+[ ] Widget (lock screen push notification?)
+[ ] Siri integration (very specific wording to add/edit/remove a task?)
+[ ] Reorder tasks on Firebase when moved
+[ ] When click a task, have next page be populated correctly
+[ ] Completed tasks list?
+[ ] No way to complete tasks currently
+[ ] Same text and background color?
