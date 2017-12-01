@@ -342,6 +342,16 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let alert = UIAlertController(title: "Error", message: "Please make sure you have a task name!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        } else if ((category.text?.isEmpty)! || category.text == "Category") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a category!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if ((importance.text?.isEmpty)! || importance.text == "Importance") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have an importance level!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         
         else {
