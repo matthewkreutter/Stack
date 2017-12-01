@@ -53,6 +53,24 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderField.inputView = reminderView
         taskNameField.delegate = self
         db = Database.database().reference()
+        taskNameField.layer.borderWidth = 1.0
+        taskNameField.layer.borderColor = UIColor.black.cgColor
+        taskNameField.layer.cornerRadius = 5.0
+        categoryField.layer.borderWidth = 1.0
+        categoryField.layer.borderColor = UIColor.black.cgColor
+        categoryField.layer.cornerRadius = 5.0
+        importanceField.layer.borderWidth = 1.0
+        importanceField.layer.borderColor = UIColor.black.cgColor
+        importanceField.layer.cornerRadius = 5.0
+        dateField.layer.borderWidth = 1.0
+        dateField.layer.borderColor = UIColor.black.cgColor
+        dateField.layer.cornerRadius = 5.0
+        timeField.layer.borderWidth = 1.0
+        timeField.layer.borderColor = UIColor.black.cgColor
+        timeField.layer.cornerRadius = 5.0
+        reminderField.layer.borderWidth = 1.0
+        reminderField.layer.borderColor = UIColor.black.cgColor
+        reminderField.layer.cornerRadius = 5.0
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {

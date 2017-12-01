@@ -27,7 +27,6 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         backgroundColorView.delegate = self
         backgroundColorView.dataSource = self
         backgroundColorField.inputView = backgroundColorView
@@ -45,6 +44,12 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let textRow = textColorOption.index(of: selectedText) {
             textColorView.selectRow(textRow, inComponent: 0, animated: false)
         }
+        textColorField.layer.borderWidth = 1.0
+        textColorField.layer.borderColor = UIColor.black.cgColor
+        textColorField.layer.cornerRadius = 5.0
+        backgroundColorField.layer.borderWidth = 1.0
+        backgroundColorField.layer.borderColor = UIColor.black.cgColor
+        backgroundColorField.layer.cornerRadius = 5.0
     }
     
     @IBAction func resetSettingsPressed(_ sender: Any) {
@@ -75,7 +80,19 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @objc func donePickerPressed() {
-        self.view.endEditing(true)
+        if (backgroundColorField.text == textColorField.text) {
+            // alert for same color
+            let alert = UIAlertController(title: "Error", message: "Make sure the text and background colors aren't the same!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            UserDefaults.standard.set(backgroundColorField.text, forKey: "backgroundColor")
+            UserDefaults.standard.set(textColorField.text, forKey: "textColor")
+            setTextColor()
+            setBackgroundColor()
+            self.view.endEditing(true)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -85,30 +102,39 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func setBackgroundColor() {
         if backgroundColorField.text == "Black" {
             backgroundColorField.backgroundColor = UIColor.black
+            self.view.backgroundColor = UIColor.black
         }
         if backgroundColorField.text == "White" {
             backgroundColorField.backgroundColor = UIColor.white
+            self.view.backgroundColor = UIColor.white
         }
         if backgroundColorField.text == "Red" {
             backgroundColorField.backgroundColor = UIColor.red
+            self.view.backgroundColor = UIColor.red
         }
         if backgroundColorField.text == "Orange" {
             backgroundColorField.backgroundColor = UIColor.orange
+            self.view.backgroundColor = UIColor.orange
         }
         if backgroundColorField.text == "Yellow" {
             backgroundColorField.backgroundColor = UIColor.yellow
+            self.view.backgroundColor = UIColor.yellow
         }
         if backgroundColorField.text == "Green" {
             backgroundColorField.backgroundColor = UIColor.green
+            self.view.backgroundColor = UIColor.green
         }
         if backgroundColorField.text == "Blue" {
             backgroundColorField.backgroundColor = UIColor.blue
+            self.view.backgroundColor = UIColor.blue
         }
         if backgroundColorField.text == "Purple" {
             backgroundColorField.backgroundColor = UIColor.purple
+            self.view.backgroundColor = UIColor.purple
         }
         if backgroundColorField.text == "Grey" {
             backgroundColorField.backgroundColor = UIColor.gray
+            self.view.backgroundColor = UIColor.gray
         }
         backgroundColorField.textColor = UIColor.white
         if backgroundColorField.text == "White" {
@@ -179,13 +205,10 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == backgroundColorView {
             backgroundColorField.text = backgroundColorOption[row]
-            UserDefaults.standard.set(backgroundColorOption[row], forKey: "backgroundColor")
-            setBackgroundColor()
+            
         }
         else if pickerView == textColorView {
             textColorField.text = textColorOption[row]
-            UserDefaults.standard.set(textColorOption[row], forKey: "textColor")
-            setTextColor()
         }
     }
 }

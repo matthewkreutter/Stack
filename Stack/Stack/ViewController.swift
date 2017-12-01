@@ -129,30 +129,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for cell in cells {
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
                 cell.backgroundColor = UIColor.black
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
                 cell.backgroundColor = UIColor.white
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
                 cell.backgroundColor = UIColor.red
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
                 cell.backgroundColor = UIColor.orange
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
                 cell.backgroundColor = UIColor.yellow
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
                 cell.backgroundColor = UIColor.green
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
                 cell.backgroundColor = UIColor.blue
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
                 cell.backgroundColor = UIColor.purple
+                
             }
             if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
                 cell.backgroundColor = UIColor.gray
+                
             }
             if UserDefaults.standard.string(forKey: "textColor") == "Black" {
                 cell.textLabel?.textColor = UIColor.black
@@ -180,31 +189,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
                 cell.textLabel?.textColor = UIColor.gray
+                self.view.backgroundColor = UIColor.gray
             }
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
             tableView.backgroundColor = UIColor.black
+            self.view.backgroundColor = UIColor.black
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "White" {
             tableView.backgroundColor = UIColor.white
+            self.view.backgroundColor = UIColor.white
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Red" {
             tableView.backgroundColor = UIColor.red
+            self.view.backgroundColor = UIColor.red
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Orange" {
             tableView.backgroundColor = UIColor.orange
+            self.view.backgroundColor = UIColor.orange
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Yellow" {
             tableView.backgroundColor = UIColor.yellow
+            self.view.backgroundColor = UIColor.yellow
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Green" {
             tableView.backgroundColor = UIColor.green
+            self.view.backgroundColor = UIColor.green
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Blue" {
             tableView.backgroundColor = UIColor.blue
+            self.view.backgroundColor = UIColor.blue
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Purple" {
             tableView.backgroundColor = UIColor.purple
+            self.view.backgroundColor = UIColor.purple
         }
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
             tableView.backgroundColor = UIColor.gray

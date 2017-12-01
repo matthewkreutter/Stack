@@ -52,6 +52,24 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         reminderView.dataSource = self
         reminder.inputView = reminderView
         taskName.delegate = self
+        taskName.layer.borderWidth = 1.0
+        taskName.layer.borderColor = UIColor.black.cgColor
+        taskName.layer.cornerRadius = 5.0
+        category.layer.borderWidth = 1.0
+        category.layer.borderColor = UIColor.black.cgColor
+        category.layer.cornerRadius = 5.0
+        importance.layer.borderWidth = 1.0
+        importance.layer.borderColor = UIColor.black.cgColor
+        importance.layer.cornerRadius = 5.0
+        date.layer.borderWidth = 1.0
+        date.layer.borderColor = UIColor.black.cgColor
+        date.layer.cornerRadius = 5.0
+        time.layer.borderWidth = 1.0
+        time.layer.borderColor = UIColor.black.cgColor
+        time.layer.cornerRadius = 5.0
+        reminder.layer.borderWidth = 1.0
+        reminder.layer.borderColor = UIColor.black.cgColor
+        reminder.layer.cornerRadius = 5.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
