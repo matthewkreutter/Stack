@@ -217,7 +217,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @objc func donePressed() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
+        dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
         date.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)

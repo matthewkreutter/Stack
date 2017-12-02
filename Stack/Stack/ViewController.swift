@@ -249,14 +249,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let date = (value?["date"] as? String)!
                     let time = (value?["time"] as? String)!
                     let reminder = (value?["reminder"] as? String)!
-                    let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder)
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MMM d, yyyy"
+                    let formattedDate = dateFormatter.date(from: date)
+                    let currentDate = Date()
+                    let timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
+                    
+                    //The larget the priority number, the higher the priority
+                    let priority = abs(Double(importance)! / timeDifference)
+                    
+                    let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
+                    
                     self.myTaskDict[id] = task
                     self.tableView.reloadData()
                 })
             }
-            //self.tableView.reloadData()
         })
-        //self.tableView.reloadData()
     }
     
     func userAlreadyExists() -> Bool {
@@ -783,7 +792,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
         if (myTaskDict[taskIDs[indexPath.row]] != nil) {
-            cell.task = Task(id: taskIDs[indexPath.row], name: (myTaskDict[taskIDs[indexPath.row]]?.name)!, category: (myTaskDict[taskIDs[indexPath.row]]?.category)!, importance: (myTaskDict[taskIDs[indexPath.row]]?.importance)!, date: (myTaskDict[taskIDs[indexPath.row]]?.date)!, time: (myTaskDict[taskIDs[indexPath.row]]?.time)!, reminder: (myTaskDict[taskIDs[indexPath.row]]?.reminder)!)
+            cell.task = Task(id: taskIDs[indexPath.row], name: (myTaskDict[taskIDs[indexPath.row]]?.name)!, category: (myTaskDict[taskIDs[indexPath.row]]?.category)!, importance: (myTaskDict[taskIDs[indexPath.row]]?.importance)!, date: (myTaskDict[taskIDs[indexPath.row]]?.date)!, time: (myTaskDict[taskIDs[indexPath.row]]?.time)!, reminder: (myTaskDict[taskIDs[indexPath.row]]?.reminder)!, priority: (myTaskDict[taskIDs[indexPath.row]]?.priority)!)
         }
         return cell
     }
