@@ -90,7 +90,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xgs-z7-aZT">
-                                <rect key="frame" x="-100" y="75" width="98" height="371"/>
+                                <rect key="frame" x="-100" y="75" width="98" height="401"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To-Do Lists" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M36-yR-oIC">
                                         <rect key="frame" x="0.0" y="0.0" width="98" height="20.5"/>
@@ -181,6 +181,13 @@
                                             <segue destination="tqX-Nv-wFa" kind="presentation" id="aDj-ap-X0d"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUH-XJ-uqb">
+                                        <rect key="frame" x="0.0" y="371" width="98" height="30"/>
+                                        <state key="normal" title="Move Tasks"/>
+                                        <connections>
+                                            <action selector="moveTasksAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AWc-4G-eAu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1nP-Fu-RdW">
@@ -252,6 +259,7 @@
                         <outlet property="menuLeadingConstraint" destination="L7J-4y-xvi" id="XPm-Xz-yb2"/>
                         <outlet property="menuStackView" destination="xgs-z7-aZT" id="QfY-RS-cdS"/>
                         <outlet property="miscellaneousList" destination="Ib1-YM-uDI" id="Vrz-XU-P9G"/>
+                        <outlet property="moveTasksClicked" destination="HUH-XJ-uqb" id="9OK-8b-CsJ"/>
                         <outlet property="priorityScoreOutlet" destination="QIb-0f-2iy" id="Qwx-YN-BfL"/>
                         <outlet property="tableLeadingConstraint" destination="ra6-4Q-mbJ" id="Kfn-qQ-eRq"/>
                         <outlet property="tableView" destination="1nP-Fu-RdW" id="dfO-HG-0QA"/>
@@ -310,7 +318,7 @@
                                 <rect key="frame" x="163" y="553" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="EUd-vi-7sU"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="backToTasks" id="EUd-vi-7sU"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYX-nD-Rbf">
@@ -362,6 +370,7 @@
                         <outlet property="reminder" destination="qEL-3d-RLZ" id="Lx3-rE-H0i"/>
                         <outlet property="taskName" destination="jJ1-4A-8b1" id="NVt-gZ-6zC"/>
                         <outlet property="time" destination="DkZ-GA-jJk" id="2ra-Hj-4yv"/>
+                        <segue destination="BYZ-38-t0r" kind="show" id="ldW-cx-siC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dv-Hr-jGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -404,8 +413,8 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTY-fg-kHe">
-                                        <rect key="frame" x="162.5" y="472" width="51" height="30"/>
-                                        <state key="normal" title="Update"/>
+                                        <rect key="frame" x="154.5" y="472" width="67" height="30"/>
+                                        <state key="normal" title="Complete"/>
                                         <connections>
                                             <action selector="addButtonTapped:" destination="cSg-at-4X2" eventType="touchUpInside" id="CsW-mZ-6Pw"/>
                                             <segue destination="BYZ-38-t0r" kind="show" id="NrE-1c-YOd"/>
@@ -444,6 +453,11 @@
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="EY0-FU-ycE"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypj-0l-bYP">
+                                        <rect key="frame" x="295" y="34" width="64" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Update"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -498,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZe-av-ubf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="849" y="-750"/>
+            <point key="canvasLocation" x="848.79999999999995" y="-750.67466266866575"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="hGr-iU-SI3">

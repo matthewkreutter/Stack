@@ -52,22 +52,22 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         reminderView.dataSource = self
         reminder.inputView = reminderView
         taskName.delegate = self
-        taskName.layer.borderWidth = 1.0
+        taskName.layer.borderWidth = 2.0
         taskName.layer.borderColor = UIColor.black.cgColor
         taskName.layer.cornerRadius = 5.0
-        category.layer.borderWidth = 1.0
+        category.layer.borderWidth = 2.0
         category.layer.borderColor = UIColor.black.cgColor
         category.layer.cornerRadius = 5.0
-        importance.layer.borderWidth = 1.0
+        importance.layer.borderWidth = 2.0
         importance.layer.borderColor = UIColor.black.cgColor
         importance.layer.cornerRadius = 5.0
-        date.layer.borderWidth = 1.0
+        date.layer.borderWidth = 2.0
         date.layer.borderColor = UIColor.black.cgColor
         date.layer.cornerRadius = 5.0
-        time.layer.borderWidth = 1.0
+        time.layer.borderWidth = 2.0
         time.layer.borderColor = UIColor.black.cgColor
         time.layer.cornerRadius = 5.0
-        reminder.layer.borderWidth = 1.0
+        reminder.layer.borderWidth = 2.0
         reminder.layer.borderColor = UIColor.black.cgColor
         reminder.layer.cornerRadius = 5.0
     }
@@ -369,8 +369,8 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             self.db.child(myTaskString).childByAutoId().setValue(newTask)
             
             // alert for SUCCESS
-            let alert = UIAlertController(title: "Task Posted!", message: "Temporary message", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: "Task Posted!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: { action in self.performSegue(withIdentifier: "backToTasks", sender: self)}))
             self.present(alert, animated: true, completion: nil)
         }
     }

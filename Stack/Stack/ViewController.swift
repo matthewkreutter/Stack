@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var priorityScoreOutlet: UIButton!
     @IBOutlet weak var importanceOutlet: UIButton!
     @IBOutlet weak var tableLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moveTasksClicked: UIButton!
     var taskIDs = [String]()
     var taskTypes: [String] = []
     var userID: Int = -1
@@ -665,6 +666,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             dueDateOutlet.tintColor = UIColor.gray
         }
     }
+    var editingTasks = false
+    @IBAction func moveTasksAction(_ sender: Any) {
+        if editingTasks == false {
+            hideMenu()
+            moveTasksClicked.tintColor = UIColor.red
+            self.tableView.isEditing = true
+            editingTasks = true
+        }
+        else {
+            hideMenu()
+            moveTasksClicked.tintColor = UIColor.appleBlue()
+            editingTasks = false
+            self.tableView.isEditing = false
+        }
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !menuIsHidden {
             guard let touchPoint = touches.first?.view else { return }
@@ -786,19 +803,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let movedObject = self.taskIDs[sourceIndexPath.row]
-//        taskIDs.remove(at: sourceIndexPath.row)
-//        taskIDs.insert(movedObject, at: destinationIndexPath.row)
-//        // To check for correctness enable: self.tableView.reloadData()
-//    }
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        return .none
-//    }
-//
-//    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+            let movedObject = self.taskIDs[sourceIndexPath.row]
+            taskIDs.remove(at: sourceIndexPath.row)
+            taskIDs.insert(movedObject, at: destinationIndexPath.row)
+    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if (editingTasks == true) {
+            return .none
+        }
+        return .delete
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let editTaskViewController = segue.destination as? EditTaskViewController,

@@ -13,7 +13,8 @@ Ordered by importance:
 [ ] Widget (lock screen push notification?)
 [ ] Siri integration (very specific wording to add/edit/remove a task?)
 [ ] Reorder tasks on Firebase when moved
-[ ] When click a task, have next page be populated correctly
+[x] When click a task, have next page be populated correctly
+[ ] Have firebase update info when task is updated
 [ ] Completed tasks list?
 [ ] No way to complete tasks currently
-[ ] Same text and background color?
+[x] Same text and background color?
