@@ -249,20 +249,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let date = (value?["date"] as? String)!
                     let time = (value?["time"] as? String)!
                     let reminder = (value?["reminder"] as? String)!
-                    
-                    var timeDifference = 0.0
-                    if (date == "" || date == "Date") {
-                        timeDifference = 2.6
-                    } else {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MMM d, yyyy"
-                        let formattedDate = dateFormatter.date(from: date)
-                        let currentDate = Date()
-                        timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
-                    }
-                    
-                    //The larget the priority number, the higher the priority
-                    let priority = abs(Double(importance)! / timeDifference)
+                    let priority = (value?["priority"] as? Double)!
                     
                     let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
                     
