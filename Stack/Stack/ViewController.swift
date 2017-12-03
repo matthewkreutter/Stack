@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var userCountKey = [String]()
     var myTaskDict = [String: Task]()
     var allTasks = [Task]()
-    
+    var sortedBy = "priority"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -233,6 +233,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func loadTasks() {
+        allTasks = []
+        taskIDs = []
         let taskListString = "tasks-" + String(userID)
         let userCountRef = db.child(taskListString)
         userCountRef.observeSingleEvent(of: .value, with: { snapshot in
@@ -256,7 +258,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     self.myTaskDict[id] = task
                     self.allTasks.append(task)
-                    self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
+                    if (self.sortedBy == "priority") {
+                        self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
+                        UserDefaults.standard.set(self.allTasks[0].name, forKey: "highestPriorityTask")
+                    }
+                    else if (self.sortedBy == "importance") {
+                        self.allTasks = self.allTasks.sorted(by: { $0.importance > $1.importance })
+                        print("running")
+                    }
+                    else if (self.sortedBy == "due date") {
+                        self.allTasks = self.allTasks.sorted(by: { $0.date > $1.date })
+                    }
+                    
                     self.tableView.reloadData()
                 })
             }
@@ -574,6 +587,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     @IBAction func allTasksFilterClicked(_ sender: Any) {
         hideMenu()
+        sortedBy = "priority"
+        loadTasks()
         importanceOutlet.tintColor = UIColor.appleBlue()
         dueDateOutlet.tintColor = UIColor.appleBlue()
         if UserDefaults.standard.string(forKey: "textColor") == "Black" {
@@ -607,6 +622,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func importanceClicked(_ sender: Any) {
         hideMenu()
+        sortedBy = "importance"
+        loadTasks()
         priorityScoreOutlet.tintColor = UIColor.appleBlue()
         dueDateOutlet.tintColor = UIColor.appleBlue()
         if UserDefaults.standard.string(forKey: "textColor") == "Black" {
@@ -640,6 +657,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func dueDateClicked(_ sender: Any) {
         hideMenu()
+        sortedBy = "due date"
+        loadTasks()
         priorityScoreOutlet.tintColor = UIColor.appleBlue()
         importanceOutlet.tintColor = UIColor.appleBlue()
         if UserDefaults.standard.string(forKey: "textColor") == "Black" {

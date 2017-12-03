@@ -11,20 +11,15 @@ import NotificationCenter
 import Firebase
 import FirebaseDatabase
 
-class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataSource, UITableViewDelegate {
-        
-    @IBOutlet weak var taskTable: UITableView!
+class TodayViewController: UIViewController, NCWidgetProviding {
     
-    var taskIDs = [String]()
-    var taskTypes: [String] = []
+    @IBOutlet weak var taskName: UILabel!
     var userID: Int = -1
     var db: DatabaseReference!
     var userCountKey = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        taskTable.dataSource = self
-        taskTable.delegate = self
         /*
         db = Database.database().reference()
         if (userAlreadyExists()) {
@@ -32,36 +27,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
             loadTasks()
         }
         */
-    }
-    
-    func loadTasks() {
-        let userCountRef = db.child("tasks-" + String(userID))
-        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-            for child in snapshot.children{
-                let userCount = (child as AnyObject).key!
-                self.taskIDs.append(userCount)
-            }
-            self.taskTable.reloadData()
-        })
+        print(UserDefaults.standard.string(forKey: "highestPriorityTask")!)
+        taskName.text = UserDefaults.standard.string(forKey: "highestPriorityTask")
     }
     
     func userAlreadyExists() -> Bool {
         return UserDefaults.standard.object(forKey: "userID") != nil
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return taskIDs.count
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask")
-        cell.textLabel?.textColor = UIColor.black
-        //cell.textLabel?.text = taskIDs[indexPath.row]
-        cell.textLabel?.text = "Hi"
-        return cell
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

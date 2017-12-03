@@ -101,6 +101,7 @@
 		D3BDEBDA5A6D9E97CE53A10A /* Pods-Stack Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stack Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stack Widget/Pods-Stack Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		DA5FC59534CEF52E99B37BDE /* Pods-StackUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StackUITests/Pods-StackUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		FD6FE7BE1FD3A32400AD6D56 /* Stack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stack.entitlements; sourceTree = "<group>"; };
 		FDA066F91FC7BE6600D6D5A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FDACEF951FC352FE00C50BDF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FDB58E971FC3D905003021F2 /* Stack Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Stack Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +178,7 @@
 		2E4B4EF41FB643D600D8FBFD /* Stack */ = {
 			isa = PBXGroup;
 			children = (
+				FD6FE7BE1FD3A32400AD6D56 /* Stack.entitlements */,
 				2E4B4EF51FB643D600D8FBFD /* AppDelegate.swift */,
 				2E4B4EF71FB643D600D8FBFD /* ViewController.swift */,
 				2E4B4EF91FB643D600D8FBFD /* Main.storyboard */,
@@ -350,6 +352,11 @@
 					2E4B4EF11FB643D500D8FBFD = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2E4B4F051FB643D600D8FBFD = {
 						CreatedOnToolsVersion = 9.1;
@@ -814,6 +821,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stack/Stack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56CZU6XFN7;
 				INFOPLIST_FILE = Stack/Info.plist;
@@ -831,6 +839,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stack/Stack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56CZU6XFN7;
 				INFOPLIST_FILE = Stack/Info.plist;
