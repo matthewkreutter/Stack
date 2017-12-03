@@ -458,6 +458,9 @@
                                         <rect key="frame" x="295" y="34" width="64" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Update"/>
+                                        <connections>
+                                            <action selector="updateButtonPressed:" destination="bZo-1v-wD3" eventType="touchUpInside" id="BIp-qo-5Le"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -508,6 +511,7 @@
                         <outlet property="reminderField" destination="kSa-zz-pTc" id="iRL-c2-h94"/>
                         <outlet property="taskNameField" destination="Jvb-gQ-uaw" id="49Q-tt-M0v"/>
                         <outlet property="timeField" destination="c6z-Zl-iR3" id="hk5-rL-IrQ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="backToTasksEdit" id="9Ut-cq-Kyw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZe-av-ubf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,6 +750,6 @@
         <image name="typicons_2-0-7_arrow-back_50_0_000000_none" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NrE-1c-YOd"/>
+        <segue reference="Zae-ld-nXt"/>
     </inferredMetricsTieBreakers>
 </document>

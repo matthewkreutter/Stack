@@ -52,6 +52,12 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         reminderView.delegate = self
         reminderView.dataSource = self
         reminderField.inputView = reminderView
+//        datePicker.delegate = self
+//        datePicker.dataSource = self
+//        dateField.inputView = datePicker
+//        timePicker.delegate = self
+//        timePicker.dataSource = self
+//        timeField.inputView = timePicker
         taskNameField.delegate = self
         db = Database.database().reference()
         taskNameField.layer.borderWidth = 2.0
@@ -84,6 +90,60 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             timeField.text = task.time
             reminderField.text = task.reminder
         }
+        var selectedName: String {
+            return taskNameField.text ?? ""
+        }
+        var selectedCategory: String {
+            return categoryField.text ?? ""
+        }
+        var selectedImportance: String {
+            return importanceField.text ?? ""
+        }
+        var selectedDate: String {
+            return dateField.text ?? ""
+        }
+        var selectedTime: String {
+            return timeField.text ?? ""
+        }
+        if (reminderField.text != "Reminder") {
+        var selectedReminderNum: String {
+            let hello = reminderField.text
+            var arr = hello?.components(separatedBy: " ")
+            return arr![0]
+        }
+        var selectedReminderType: String {
+            let hello = reminderField.text
+            var arr = hello?.components(separatedBy: " ")
+            print(arr![1])
+            return arr![1]
+        }
+            if let reminderRow = reminderNumOption.index(of: selectedReminderNum) {
+                reminderView.selectRow(reminderRow, inComponent: 0, animated: false)
+            }
+            if let reminderTypeRow = reminderOption.index(of: selectedReminderType) {
+                reminderView.selectRow(reminderTypeRow, inComponent: 1, animated: false)
+            }
+        }
+        if let categoryRow = categoryOption.index(of: selectedCategory) {
+            categoryView.selectRow(categoryRow, inComponent: 0, animated: false)
+        }
+        if let importanceRow = importanceOption.index(of: selectedImportance) {
+            importanceView.selectRow(importanceRow, inComponent: 0, animated: false)
+        }
+        let dateString = dateField.text
+        let df = DateFormatter()
+        df.dateFormat = "MMM d, yyyy"
+        let date = df.date(from: dateString!)
+        if let unwrappedDate = date {
+            datePicker.setDate(unwrappedDate, animated: false)
+        }
+        let timeString = timeField.text
+        let tf = DateFormatter()
+        tf.dateFormat = "h:mm a"
+        let time = tf.date(from: timeString!)
+        if let unwrappedTime = time {
+            timePicker.setDate(unwrappedTime, animated: false)
+        }
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
@@ -95,6 +155,61 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 //        deletedTask.removeValue()
 //        taskIDs.remove(at: indexPath.row)
 //        tableView.reloadData()
+    }
+    
+    @IBAction func updateButtonPressed(_ sender: Any) {
+        if ((taskNameField.text?.isEmpty)! || taskNameField.text == "Task Name") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a task name!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if ((categoryField.text?.isEmpty)! || categoryField.text == "Category") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have a category!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if ((importanceField.text?.isEmpty)! || importanceField.text == "Importance") {
+            // alert for fields not filled
+            let alert = UIAlertController(title: "Error", message: "Please make sure you have an importance level!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            // push new task to database
+            var timeDifference = 0.0
+            var dateString = ""
+            if (dateField.text == "" || dateField.text == "Date") {
+                timeDifference = 5
+                dateString = "April 24, 3000"
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, yyyy"
+                let formattedDate = dateFormatter.date(from: dateField.text!)
+                let currentDate = Date()
+                timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
+                dateString = dateField.text!
+            }
+        let tempImportance = importanceField.text!
+        let priority = abs(Double(tempImportance)! / timeDifference)
+        let intImportance = Int(tempImportance)
+        let newTask = [
+            "name": taskNameField.text as Any,
+            "category": categoryField.text as Any,
+            "importance": intImportance as Any,
+            "date": dateString as Any,
+            "time": timeField.text as Any,
+            "reminder": reminderField.text as Any,
+            "priority": priority as Any
+            ] as [String: Any]
+        
+        let myTaskString = "tasks-" + String(UserDefaults.standard.integer(forKey: "userID"))
+        self.db.child(myTaskString).child(task.id).setValue(newTask)
+            
+            // alert for SUCCESS
+            let alert = UIAlertController(title: "Task Updated!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: { action in self.performSegue(withIdentifier: "backToTasksEdit", sender: self)}))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {

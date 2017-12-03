@@ -36,19 +36,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var moveTasksClicked: UIButton!
     var taskIDs = [String]()
+    var completedTasks = [String]()
     var taskTypes: [String] = []
     var userID: Int = -1
     var db: DatabaseReference!
     var userCountKey = [String]()
     var myTaskDict = [String: Task]()
     var allTasks = [Task]()
-    var sortedBy = "priority"
+    var sortedBy = ""
+    var allClicked = false
+    var homeworkClicked = false
+    var choresClicked = false
+    var errandsClicked = false
+    var miscellaneousClicked = false
+    var completedClicked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        sortedBy = "priority"
+        allClicked = true
         db = Database.database().reference()
         
         if (userAlreadyExists()) {
@@ -78,8 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
-        self.tableView.addGestureRecognizer(tap)
+        //        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
+        //        self.tableView.addGestureRecognizer(tap)
         
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
@@ -234,57 +242,98 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tableView.backgroundColor = UIColor.gray
         }
     }
-
+    
     func loadTasks() {
         allTasks = []
         taskIDs = []
-        let taskListString = "tasks-" + String(userID)
+        completedTasks = []
+        var taskListString = "tasks-" + String(userID)
+        if (self.completedClicked == true) {
+            taskListString = "completedTasks-" + String(userID)
+        }
         let userCountRef = db.child(taskListString)
         userCountRef.observeSingleEvent(of: .value, with: { snapshot in
             for child in snapshot.children{
                 let taskID = (child as AnyObject).key!
-                self.taskIDs.append(taskID)
-            }
-            
-            for id in self.taskIDs {
-                self.db.child(taskListString + "/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    let name = (value?["name"] as? String)!
-                    let category = (value?["category"] as? String)!
-                    let importance = (value?["importance"] as? Int)!
-                    let date = (value?["date"] as? String)!
-                    let time = (value?["time"] as? String)!
-                    let reminder = (value?["reminder"] as? String)!
-                    let priority = (value?["priority"] as? Double)!
-                    
-                    let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
-                    
-                    self.myTaskDict[id] = task
-                    self.allTasks.append(task)
-                    if (self.sortedBy == "priority") {
-                        self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
-                        let defaults = UserDefaults(suiteName: "group.Stack")
-                        defaults?.set(self.allTasks[0].name, forKey: "highestPriorityTask")
-                        defaults?.set(self.allTasks[0].importance, forKey: "highestPriorityTaskImportance")
-                        defaults?.set(self.allTasks[0].date, forKey: "highestPriorityTaskDate")
-                        defaults?.set(self.allTasks[0].reminder, forKey: "highestPriorityTaskReminder")
-                        defaults?.set(self.allTasks[0].category, forKey: "highestPriorityTaskCategory")
-                        defaults?.synchronize()
-                    }
-                    else if (self.sortedBy == "importance") {
-                        self.allTasks = self.allTasks.sorted(by: { $0.importance > $1.importance})
-                    }
-                    else if (self.sortedBy == "due date") {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MMM d, yyyy"
-                        let currentDate = Date()
-                        self.allTasks = self.allTasks.sorted(by: {(dateFormatter.date(from: $0.date)?.timeIntervalSince(currentDate))! / 1000000.0 < (dateFormatter.date(from: $1.date)?.timeIntervalSince(currentDate))! / 1000000.0
-                        })
-                    }
+                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
+                if (self.allClicked == true) {
+                    self.taskIDs.append(taskID)
                     self.tableView.reloadData()
-                })
+                }
+                if (self.homeworkClicked == true) {
+                    if childSnapshot.value as? String == "Homework" {
+                        self.taskIDs.append(taskID)
+                        self.tableView.reloadData()
+                    }
+                }
+                if (self.choresClicked == true) {
+                    if childSnapshot.value as? String == "Chores" {
+                        self.taskIDs.append(taskID)
+                        self.tableView.reloadData()
+                    }
+                }
+                if (self.errandsClicked == true) {
+                    if childSnapshot.value as? String == "Errands" {
+                        self.taskIDs.append(taskID)
+                        self.tableView.reloadData()
+                    }
+                }
+                if (self.miscellaneousClicked == true) {
+                    if childSnapshot.value as? String == "Miscellaneous" {
+                        self.taskIDs.append(taskID)
+                        self.tableView.reloadData()
+                    }
+                }
+                if (self.completedClicked == true) {
+                    let childNameSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "name")
+                    self.completedTasks.append(childNameSnapshot.value as! String)
+                    self.tableView.reloadData()
+                }
+            }
+            if (self.completedClicked != true) {
+                for id in self.taskIDs {
+                    
+                    self.db.child(taskListString + "/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                        let value = snapshot.value as? NSDictionary
+                        let name = (value?["name"] as? String)!
+                        let category = (value?["category"] as? String)!
+                        let importance = (value?["importance"] as? Int)!
+                        let date = (value?["date"] as? String)!
+                        let time = (value?["time"] as? String)!
+                        let reminder = (value?["reminder"] as? String)!
+                        let priority = (value?["priority"] as? Double)!
+                        
+                        let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
+                        
+                        self.myTaskDict[id] = task
+                        self.allTasks.append(task)
+                        if (self.sortedBy == "priority") {
+                            self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
+                            let defaults = UserDefaults(suiteName: "group.Stack")
+                            defaults?.set(self.allTasks[0].name, forKey: "highestPriorityTask")
+                            defaults?.set(self.allTasks[0].importance, forKey: "highestPriorityTaskImportance")
+                            defaults?.set(self.allTasks[0].date, forKey: "highestPriorityTaskDate")
+                            defaults?.set(self.allTasks[0].reminder, forKey: "highestPriorityTaskReminder")
+                            defaults?.set(self.allTasks[0].category, forKey: "highestPriorityTaskCategory")
+                            defaults?.synchronize()
+                        }
+                        else if (self.sortedBy == "importance") {
+                            self.allTasks = self.allTasks.sorted(by: { $0.importance > $1.importance})
+                        }
+                        else if (self.sortedBy == "due date") {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MMM d, yyyy"
+                            let currentDate = Date()
+                            self.allTasks = self.allTasks.sorted(by: {(dateFormatter.date(from: $0.date)?.timeIntervalSince(currentDate))! / 1000000.0 < (dateFormatter.date(from: $1.date)?.timeIntervalSince(currentDate))! / 1000000.0
+                            })
+                        }
+                        self.tableView.reloadData()
+                    })
+                }
             }
         })
+        
     }
     
     func userAlreadyExists() -> Bool {
@@ -306,10 +355,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func allTasksListClicked(_ sender: Any) {
+        allClicked = true
+        homeworkClicked = false
+        choresClicked = false
+        errandsClicked = false
+        miscellaneousClicked = false
+        completedClicked = false
         listTypeLabel.text = "All Tasks"
         hideMenu()
-        self.tableView.reloadData()
         loadTasks()
+        self.tableView.reloadData()
         homeworkList.tintColor = UIColor.appleBlue()
         choresList.tintColor = UIColor.appleBlue()
         errandsList.tintColor = UIColor.appleBlue()
@@ -344,22 +399,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBAction func homeworkClicked(_ sender: Any) {
+        allClicked = false
+        homeworkClicked = true
+        choresClicked = false
+        errandsClicked = false
+        miscellaneousClicked = false
+        completedClicked = false
         listTypeLabel.text = "Homework"
         hideMenu()
         taskIDs = []
+        loadTasks()
         self.tableView.reloadData()
-        let taskListString = "tasks-" + String(userID)
-        let userCountRef = db.child(taskListString)
-        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-            for child in snapshot.children{
-                let taskID = (child as AnyObject).key!
-                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
-                if childSnapshot.value as? String == "Homework" {
-                    self.taskIDs.append(taskID)
-                    self.tableView.reloadData()
-                }
-            }
-        })
         allTasksList.tintColor = UIColor.appleBlue()
         choresList.tintColor = UIColor.appleBlue()
         errandsList.tintColor = UIColor.appleBlue()
@@ -395,22 +445,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func choresClicked(_ sender: Any) {
+        allClicked = false
+        homeworkClicked = false
+        choresClicked = true
+        errandsClicked = false
+        miscellaneousClicked = false
+        completedClicked = false
         listTypeLabel.text = "Chores"
         hideMenu()
         taskIDs = []
+        loadTasks()
         self.tableView.reloadData()
-        let taskListString = "tasks-" + String(userID)
-        let userCountRef = db.child(taskListString)
-        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-            for child in snapshot.children{
-                let taskID = (child as AnyObject).key!
-                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
-                if childSnapshot.value as? String == "Chores" {
-                    self.taskIDs.append(taskID)
-                    self.tableView.reloadData()
-                }
-            }
-        })
         allTasksList.tintColor = UIColor.appleBlue()
         homeworkList.tintColor = UIColor.appleBlue()
         errandsList.tintColor = UIColor.appleBlue()
@@ -445,22 +490,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBAction func errandsClicked(_ sender: Any) {
+        allClicked = false
+        homeworkClicked = false
+        choresClicked = false
+        errandsClicked = true
+        miscellaneousClicked = false
+        completedClicked = false
         listTypeLabel.text = "Errands"
         hideMenu()
         taskIDs = []
+        loadTasks()
         self.tableView.reloadData()
-        let taskListString = "tasks-" + String(userID)
-        let userCountRef = db.child(taskListString)
-        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-            for child in snapshot.children{
-                let taskID = (child as AnyObject).key!
-                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
-                if childSnapshot.value as? String == "Errands" {
-                    self.taskIDs.append(taskID)
-                    self.tableView.reloadData()
-                }
-            }
-        })
         allTasksList.tintColor = UIColor.appleBlue()
         choresList.tintColor = UIColor.appleBlue()
         homeworkList.tintColor = UIColor.appleBlue()
@@ -495,22 +535,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBAction func miscellaneousClicked(_ sender: Any) {
+        allClicked = false
+        homeworkClicked = false
+        choresClicked = false
+        errandsClicked = false
+        miscellaneousClicked = true
+        completedClicked = false
         listTypeLabel.text = "Miscellaneous"
         hideMenu()
         taskIDs = []
+        loadTasks()
         self.tableView.reloadData()
-        let taskListString = "tasks-" + String(userID)
-        let userCountRef = db.child(taskListString)
-        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-            for child in snapshot.children{
-                let taskID = (child as AnyObject).key!
-                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
-                if childSnapshot.value as? String == "Miscellaneous" {
-                    self.taskIDs.append(taskID)
-                    self.tableView.reloadData()
-                }
-            }
-        })
         allTasksList.tintColor = UIColor.appleBlue()
         choresList.tintColor = UIColor.appleBlue()
         errandsList.tintColor = UIColor.appleBlue()
@@ -546,20 +581,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func completedTasksClicked(_ sender: Any) {
+        allClicked = false
+        homeworkClicked = false
+        choresClicked = false
+        errandsClicked = false
+        miscellaneousClicked = false
+        completedClicked = true
         listTypeLabel.text = "Completed Tasks"
         hideMenu()
         taskIDs = []
+        loadTasks()
         self.tableView.reloadData()
-//        let taskListString = "completedTasks-" + String(userID)
-//        let userCountRef = db.child(taskListString)
-//        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
-//            for child in snapshot.children{
-//                let taskID = (child as AnyObject).key!
-//                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "name")
-//                    self.taskIDs.append(taskID)
-//                    self.tableView.reloadData()
-//            }
-//        })
         allTasksList.tintColor = UIColor.appleBlue()
         choresList.tintColor = UIColor.appleBlue()
         errandsList.tintColor = UIColor.appleBlue()
@@ -741,7 +773,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.completedClicked != true) {
         return allTasks.count
+        }
+        else {
+            return completedTasks.count
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -749,14 +786,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (self.completedClicked != true) {
         if menuIsHidden {
             performSegue(withIdentifier: "editTaskSegue", sender: self)
+            }
         }
+    }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "editTaskSegue" {
+            if (self.completedClicked == true) {
+                return false
+            }
+        }
+        return true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //let cell = UITableViewCell(style: .default, reuseIdentifier: "aTask") as! TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "aTask", for: indexPath) as! TableViewCell
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Black" {
             cell.backgroundColor = UIColor.black
@@ -812,14 +857,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
             cell.textLabel?.textColor = UIColor.gray
         }
+        if (self.completedClicked != true) {
         if (!(indexPath.row >= allTasks.count || indexPath.row < 0)) {
+            
             cell.textLabel?.text = allTasks[indexPath.row].name
             cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), reminder: (allTasks[indexPath.row].reminder), priority: (allTasks[indexPath.row].priority))
+            }
+            
         }
+        else {
+            cell.textLabel?.text = completedTasks[indexPath.row]
+        }
+        print (completedTasks)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (self.completedClicked != true) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             //FIXME delete from Firebase
             // Create a reference to the file to delete
@@ -832,46 +886,55 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             taskIDs.remove(at: indexPath.row)
             tableView.reloadData()
         }
+        }
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-            let movedObject = self.taskIDs[sourceIndexPath.row]
-            taskIDs.remove(at: sourceIndexPath.row)
-            taskIDs.insert(movedObject, at: destinationIndexPath.row)
+        if (self.completedClicked != true) {
+        let movedObject = self.taskIDs[sourceIndexPath.row]
+        taskIDs.remove(at: sourceIndexPath.row)
+        taskIDs.insert(movedObject, at: destinationIndexPath.row)
+        }
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if (self.completedClicked != true) {
         if (editingTasks == true) {
             return .none
         }
         return .delete
+        }
+        return .none
     }
-
+    
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
-    @objc func tableTapped(tap:UITapGestureRecognizer) {
-        let location = tap.location(in: self.tableView)
-        let path = self.tableView.indexPathForRow(at: location)
-        if let indexPathForRow = path {
-            self.tableView(self.tableView, didSelectRowAt: indexPathForRow)
-            if !menuIsHidden {
-                hideMenu()
-            }
-        } else {
-            if !menuIsHidden {
-                hideMenu()
-            }
-        }
-    }
+    //    @objc func tableTapped(tap:UITapGestureRecognizer) {
+    //        let location = tap.location(in: self.tableView)
+    //        let path = self.tableView.indexPathForRow(at: location)
+    //        if let indexPathForRow = path {
+    //            self.tableView(self.tableView, didSelectRowAt: indexPathForRow)
+    //            if !menuIsHidden {
+    //                hideMenu()
+    //            }
+    //        } else {
+    //            if !menuIsHidden {
+    //                hideMenu()
+    //            }
+    //        }
+    //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(completedClicked)
+        if (self.completedClicked != true) {
         if let editTaskViewController = segue.destination as? EditTaskViewController,
-        let currentSender = sender as? TableViewCell {
+            let currentSender = sender as? TableViewCell {
             editTaskViewController.task = myTaskDict[(currentSender.task?.id)!]
-                //editTaskViewController.category = send.category
-                //editTaskViewController.taskName = taskIDs[taskIndex]
+            //editTaskViewController.category = send.category
+            //editTaskViewController.taskName = taskIDs[taskIndex]
+        }
         }
     }
     
