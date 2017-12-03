@@ -785,13 +785,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
             cell.textLabel?.textColor = UIColor.gray
         }
-        cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
+        cell.textLabel?.text = allTasks[indexPath.row].name
         if (indexPath.row >= allTasks.count || indexPath.row < 0) {
             print("test")
         } else {
             cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), reminder: (allTasks[indexPath.row].reminder), priority: (allTasks[indexPath.row].priority))
         }
-
         return cell
     }
     
