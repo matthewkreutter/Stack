@@ -78,6 +78,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
+        self.tableView.addGestureRecognizer(tap)
+        
         self.view.bringSubview(toFront: menuStackView)
         menuStackView.setCustomSpacing(15.0, after: listLabel)
         menuStackView.setCustomSpacing(15.0, after: filterLabel)
@@ -278,7 +281,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         self.allTasks = self.allTasks.sorted(by: {(dateFormatter.date(from: $0.date)?.timeIntervalSince(currentDate))! / 1000000.0 < (dateFormatter.date(from: $1.date)?.timeIntervalSince(currentDate))! / 1000000.0
                         })
                     }
-                    
                     self.tableView.reloadData()
                 })
             }
@@ -837,6 +839,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             taskIDs.remove(at: sourceIndexPath.row)
             taskIDs.insert(movedObject, at: destinationIndexPath.row)
     }
+    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if (editingTasks == true) {
             return .none
@@ -846,6 +849,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    @objc func tableTapped(tap:UITapGestureRecognizer) {
+        let location = tap.location(in: self.tableView)
+        let path = self.tableView.indexPathForRow(at: location)
+        if let indexPathForRow = path {
+            self.tableView(self.tableView, didSelectRowAt: indexPathForRow)
+            if !menuIsHidden {
+                hideMenu()
+            }
+        } else {
+            if !menuIsHidden {
+                hideMenu()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
