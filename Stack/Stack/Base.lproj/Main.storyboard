@@ -416,7 +416,7 @@
                                         <rect key="frame" x="154.5" y="472" width="67" height="30"/>
                                         <state key="normal" title="Complete"/>
                                         <connections>
-                                            <action selector="addButtonTapped:" destination="cSg-at-4X2" eventType="touchUpInside" id="CsW-mZ-6Pw"/>
+                                            <action selector="completeButtonPressed:" destination="bZo-1v-wD3" eventType="touchUpInside" id="zvp-O6-6Yd"/>
                                             <segue destination="BYZ-38-t0r" kind="show" id="NrE-1c-YOd"/>
                                         </connections>
                                     </button>
@@ -746,6 +746,6 @@
         <image name="typicons_2-0-7_arrow-back_50_0_000000_none" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EUd-vi-7sU"/>
+        <segue reference="NrE-1c-YOd"/>
     </inferredMetricsTieBreakers>
 </document>

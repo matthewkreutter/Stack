@@ -13,6 +13,10 @@ import FirebaseDatabase
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
+    @IBOutlet weak var reminder: UILabel!
+    @IBOutlet weak var importance: UILabel!
+    @IBOutlet weak var category: UILabel!
+    @IBOutlet weak var dueDate: UILabel!
     @IBOutlet weak var taskName: UILabel!
     var userID: Int = -1
     var db: DatabaseReference!
@@ -32,11 +36,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillAppear(_ animated: Bool) {
         let defaults = UserDefaults(suiteName: "group.Stack")
         defaults?.synchronize()
-        if let task = defaults!.string(forKey: "highestPriorityTask") {
-            self.taskName.text = task
+        let name = defaults!.string(forKey: "highestPriorityTask")
+        let taskImportance = defaults!.string(forKey: "highestPriorityTaskImportance")
+        let taskDate = defaults!.string(forKey: "highestPriorityTaskDate")
+        let taskReminder = defaults!.string(forKey: "highestPriorityTaskReminder")
+        let taskCategory = defaults!.string(forKey: "highestPriorityTaskCategory")
+        self.taskName.text = name
+        self.importance.text = "Importance: " + taskImportance!
+        self.category.text = taskCategory
+        if (taskDate == "Date" || taskDate == "April 24, 3000") {
+            self.dueDate.text = "No Due Date"
         }
         else {
-            self.taskName.text = "Cannot find task"
+            self.dueDate.text = taskDate
+        }
+        if (taskReminder == "Reminder") {
+            self.reminder.text = "No Reminder Time"
+        }
+        else {
+            self.reminder.text = "Reminder: " + taskReminder!
         }
     }
     

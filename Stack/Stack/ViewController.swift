@@ -262,6 +262,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
                         let defaults = UserDefaults(suiteName: "group.Stack")
                         defaults?.set(self.allTasks[0].name, forKey: "highestPriorityTask")
+                        defaults?.set(self.allTasks[0].importance, forKey: "highestPriorityTaskImportance")
+                        defaults?.set(self.allTasks[0].date, forKey: "highestPriorityTaskDate")
+                        defaults?.set(self.allTasks[0].reminder, forKey: "highestPriorityTaskReminder")
+                        defaults?.set(self.allTasks[0].category, forKey: "highestPriorityTaskCategory")
                         defaults?.synchronize()
                     }
                     else if (self.sortedBy == "importance") {
@@ -544,16 +548,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         hideMenu()
         taskIDs = []
         self.tableView.reloadData()
-//        let taskListString = "tasks-" + String(userID)
+//        let taskListString = "completedTasks-" + String(userID)
 //        let userCountRef = db.child(taskListString)
 //        userCountRef.observeSingleEvent(of: .value, with: { snapshot in
 //            for child in snapshot.children{
 //                let taskID = (child as AnyObject).key!
-//                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "category")
-//                if childSnapshot.value as? String == "Miscellaneous" {
+//                let childSnapshot = snapshot.childSnapshot(forPath: taskID).childSnapshot(forPath: "name")
 //                    self.taskIDs.append(taskID)
 //                    self.tableView.reloadData()
-//                }
 //            }
 //        })
         allTasksList.tintColor = UIColor.appleBlue()

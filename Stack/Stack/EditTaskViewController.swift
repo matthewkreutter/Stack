@@ -96,6 +96,14 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 //        taskIDs.remove(at: indexPath.row)
 //        tableView.reloadData()
     }
+    @IBAction func completeButtonPressed(_ sender: Any) {
+        let newTask = [
+            "name": taskNameField.text as Any
+            ] as [String: Any]
+        
+        let myTaskString = "completedTasks-" + String(UserDefaults.standard.integer(forKey: "userID"))
+        self.db.child(myTaskString).childByAutoId().setValue(newTask)
+    }
     override func viewWillAppear(_ animated: Bool) {
         setColors()
     }
