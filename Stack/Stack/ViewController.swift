@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import UserNotifications
 
 extension UIColor {
     static func appleBlue() -> UIColor {
@@ -301,10 +302,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         let importance = (value?["importance"] as? Int)!
                         let date = (value?["date"] as? String)!
                         let time = (value?["time"] as? String)!
-                        let reminder = (value?["reminder"] as? String)!
                         let priority = (value?["priority"] as? Double)!
                         
-                        let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
+                        let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, priority: priority)
                         
                         self.myTaskDict[id] = task
                         self.allTasks.append(task)
@@ -314,7 +314,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                             defaults?.set(self.allTasks[0].name, forKey: "highestPriorityTask")
                             defaults?.set(self.allTasks[0].importance, forKey: "highestPriorityTaskImportance")
                             defaults?.set(self.allTasks[0].date, forKey: "highestPriorityTaskDate")
-                            defaults?.set(self.allTasks[0].reminder, forKey: "highestPriorityTaskReminder")
                             defaults?.set(self.allTasks[0].category, forKey: "highestPriorityTaskCategory")
                             defaults?.synchronize()
                         }
@@ -731,6 +730,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     var editingTasks = false
     @IBAction func moveTasksAction(_ sender: Any) {
+        if (completedClicked != true) {
         if editingTasks == false {
             hideMenu()
             moveTasksClicked.tintColor = UIColor.red
@@ -742,6 +742,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             moveTasksClicked.tintColor = UIColor.appleBlue()
             editingTasks = false
             self.tableView.isEditing = false
+        }
+        }
+        else {
+            let alert = UIAlertController(title: "Error", message: "Can't reorder completed tasks.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
@@ -861,7 +867,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if (!(indexPath.row >= allTasks.count || indexPath.row < 0)) {
             
             cell.textLabel?.text = allTasks[indexPath.row].name
-            cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), reminder: (allTasks[indexPath.row].reminder), priority: (allTasks[indexPath.row].priority))
+            cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), priority: (allTasks[indexPath.row].priority))
             }
             
         }

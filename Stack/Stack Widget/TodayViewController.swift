@@ -13,7 +13,6 @@ import FirebaseDatabase
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    @IBOutlet weak var reminder: UILabel!
     @IBOutlet weak var importance: UILabel!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var dueDate: UILabel!
@@ -39,7 +38,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let name = defaults!.string(forKey: "highestPriorityTask")
         let taskImportance = defaults!.string(forKey: "highestPriorityTaskImportance")
         let taskDate = defaults!.string(forKey: "highestPriorityTaskDate")
-        let taskReminder = defaults!.string(forKey: "highestPriorityTaskReminder")
         let taskCategory = defaults!.string(forKey: "highestPriorityTaskCategory")
         self.taskName.text = name
         self.importance.text = "Importance: " + taskImportance!
@@ -49,12 +47,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         else {
             self.dueDate.text = taskDate
-        }
-        if (taskReminder == "Reminder") {
-            self.reminder.text = "No Reminder Time"
-        }
-        else {
-            self.reminder.text = "Reminder: " + taskReminder!
         }
     }
     

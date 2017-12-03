@@ -8,13 +8,13 @@ Ordered by importance:
 [x] Delete tasks from firebase
 [x] Make list type filters work (add filters, etc.)
 [x] Drag and move tasks to reorder
-[x ] Implement priority ordering (set different ordering options too)
-[ ] Make sorting type filters work (add filters, etc.)
+[x] Implement priority ordering (set different ordering options too)
+[x] Make sorting type filters work (add filters, etc.)
 [x ] Widget (lock screen push notification?)
 [ ] Siri integration (very specific wording to add/edit/remove a task?)
 [ ] Reorder tasks on Firebase when moved
 [x] When click a task, have next page be populated correctly
-[ ] Have firebase update info when task is updated
-[ ] Completed tasks list?
-[ ] No way to complete tasks currently
+[x] Have firebase update info when task is updated
+[x] Completed tasks list?
+[x] No way to complete tasks currently
 [x] Same text and background color?

@@ -37,13 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Importance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwF-Yh-vm7">
-                                <rect key="frame" x="41" y="169.5" width="88" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k6-aY-dBA">
-                                <rect key="frame" x="198.5" y="169.5" width="73" height="21"/>
+                                <rect key="frame" x="116" y="169.5" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -51,10 +45,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="fZv-Yt-RGu" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="174-Jx-gMV"/>
-                            <constraint firstItem="9k6-aY-dBA" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" constant="75" id="2Tm-dX-bOI"/>
-                            <constraint firstItem="QwF-Yh-vm7" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" constant="-75" id="4nE-Rp-NUo"/>
+                            <constraint firstItem="QwF-Yh-vm7" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="4nE-Rp-NUo"/>
                             <constraint firstItem="RSI-fp-oNV" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="588-9a-ipQ"/>
-                            <constraint firstItem="9k6-aY-dBA" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" constant="30" id="6B8-Hg-gcw"/>
                             <constraint firstItem="RSI-fp-oNV" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" constant="-75" id="Mtj-6f-KdB"/>
                             <constraint firstItem="QwF-Yh-vm7" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" constant="30" id="RLL-EZ-t7H"/>
                             <constraint firstItem="kFw-dg-hSK" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" constant="-30" id="Zkl-CC-LBi"/>
@@ -70,7 +62,6 @@
                         <outlet property="category" destination="fZv-Yt-RGu" id="3MW-cK-la7"/>
                         <outlet property="dueDate" destination="RSI-fp-oNV" id="0HE-K3-OQh"/>
                         <outlet property="importance" destination="QwF-Yh-vm7" id="q6W-fl-CLu"/>
-                        <outlet property="reminder" destination="9k6-aY-dBA" id="cJ3-3q-Bth"/>
                         <outlet property="taskName" destination="kFw-dg-hSK" id="2k3-mL-IAq"/>
                     </connections>
                 </viewController>

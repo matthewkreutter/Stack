@@ -16,6 +16,5 @@ struct Task {
     var importance: Int
     var date: String
     var time: String
-    var reminder: String
     var priority: Double
 }
