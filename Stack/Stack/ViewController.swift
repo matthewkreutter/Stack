@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var db: DatabaseReference!
     var userCountKey = [String]()
     var myTaskDict = [String: Task]()
+    var allTasks = [Task]()
     
     
     override func viewDidLoad() {
@@ -124,6 +125,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         setColors()
+        //self.tableView.reloadData()
     }
     func setColors() {
         let cells = self.tableView.visibleCells
@@ -237,7 +239,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             for child in snapshot.children{
                 let taskID = (child as AnyObject).key!
                 self.taskIDs.append(taskID)
-                self.tableView.reloadData()
             }
             
             for id in self.taskIDs {
@@ -254,6 +255,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let task = Task(id: id, name: name, category: category, importance: importance, date: date, time: time, reminder: reminder, priority: priority)
                     
                     self.myTaskDict[id] = task
+                    self.allTasks.append(task)
+                    self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
                     self.tableView.reloadData()
                 })
             }
@@ -711,7 +714,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskIDs.count
+        return allTasks.count
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -783,9 +786,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.textLabel?.textColor = UIColor.gray
         }
         cell.textLabel?.text = myTaskDict[taskIDs[indexPath.row]]?.name
-        if (myTaskDict[taskIDs[indexPath.row]] != nil) {
-            cell.task = Task(id: taskIDs[indexPath.row], name: (myTaskDict[taskIDs[indexPath.row]]?.name)!, category: (myTaskDict[taskIDs[indexPath.row]]?.category)!, importance: (myTaskDict[taskIDs[indexPath.row]]?.importance)!, date: (myTaskDict[taskIDs[indexPath.row]]?.date)!, time: (myTaskDict[taskIDs[indexPath.row]]?.time)!, reminder: (myTaskDict[taskIDs[indexPath.row]]?.reminder)!, priority: (myTaskDict[taskIDs[indexPath.row]]?.priority)!)
+        if (indexPath.row >= allTasks.count || indexPath.row < 0) {
+            print("test")
+        } else {
+            cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), reminder: (allTasks[indexPath.row].reminder), priority: (allTasks[indexPath.row].priority))
         }
+
         return cell
     }
     
