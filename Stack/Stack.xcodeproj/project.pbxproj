@@ -74,6 +74,7 @@
 /* Begin PBXFileReference section */
 		0B7E0ADB335C1F6BD7971AE5 /* Pods_Stack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B84A6FD0DEC04DC30E21E6 /* Pods_StackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2D86161FD3A3F800C286F9 /* Stack Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Stack Widget.entitlements"; sourceTree = "<group>"; };
 		2E4B4EF21FB643D500D8FBFD /* Stack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E4B4EF51FB643D600D8FBFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E4B4EF71FB643D600D8FBFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 		FDB58E9B1FC3D905003021F2 /* Stack Widget */ = {
 			isa = PBXGroup;
 			children = (
+				2E2D86161FD3A3F800C286F9 /* Stack Widget.entitlements */,
 				FDB58E9C1FC3D905003021F2 /* TodayViewController.swift */,
 				FDB58E9E1FC3D905003021F2 /* MainInterface.storyboard */,
 				FDB58EA11FC3D905003021F2 /* Info.plist */,
@@ -371,6 +373,11 @@
 					FDB58E961FC3D905003021F2 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -921,7 +928,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3BDEBDA5A6D9E97CE53A10A /* Pods-Stack Widget.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Stack Widget/Stack Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 56CZU6XFN7;
 				INFOPLIST_FILE = "Stack Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dlt.Stack.Stack-Widget";
@@ -936,7 +945,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54C7C8D5801C9583E0380D05 /* Pods-Stack Widget.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Stack Widget/Stack Widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 56CZU6XFN7;
 				INFOPLIST_FILE = "Stack Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dlt.Stack.Stack-Widget";

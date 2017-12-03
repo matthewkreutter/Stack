@@ -357,24 +357,28 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         else {
             // push new task to database
             var timeDifference = 0.0
+            var dateString = ""
             if (date.text == "" || date.text == "Date") {
-                timeDifference = 2.6
+                timeDifference = 5
+                dateString = "April 24, 3000"
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, yyyy"
                 let formattedDate = dateFormatter.date(from: date.text!)
                 let currentDate = Date()
                 timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
+                dateString = date.text!
             }
             
             //The larget the priority number, the higher the priority
             let tempImportance = importance.text!
             let priority = abs(Double(tempImportance)! / timeDifference)
+            let intImportance = Int(tempImportance)
             let newTask = [
                 "name": taskName.text as Any,
                 "category": category.text as Any,
-                "importance": importance.text as Any,
-                "date": date.text as Any,
+                "importance": intImportance as Any,
+                "date": dateString as Any,
                 "time": time.text as Any,
                 "reminder": reminder.text as Any,
                 "priority": priority as Any

@@ -75,8 +75,12 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if (task != nil) {
             taskNameField.text = task.name
             categoryField.text = task.category
-            importanceField.text = task.importance
-            dateField.text = task.date
+            importanceField.text = String(task.importance)
+            if (task.date == "April 24, 3000") {
+                dateField.text = "Date"
+            } else {
+                dateField.text = task.date
+            }
             timeField.text = task.time
             reminderField.text = task.reminder
         }

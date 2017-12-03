@@ -13,7 +13,7 @@ struct Task {
     var id: String
     var name: String
     var category: String
-    var importance: String
+    var importance: Int
     var date: String
     var time: String
     var reminder: String

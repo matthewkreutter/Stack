@@ -148,7 +148,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIb-0f-2iy">
                                         <rect key="frame" x="0.0" y="221" width="98" height="30"/>
-                                        <state key="normal" title="All Tasks"/>
+                                        <state key="normal" title="My Stack"/>
                                         <connections>
                                             <action selector="allTasksFilterClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XVh-lZ-oAE"/>
                                         </connections>
@@ -183,7 +183,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUH-XJ-uqb">
                                         <rect key="frame" x="0.0" y="371" width="98" height="30"/>
-                                        <state key="normal" title="Move Tasks"/>
+                                        <state key="normal" title="Reorder Stack"/>
                                         <connections>
                                             <action selector="moveTasksAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AWc-4G-eAu"/>
                                         </connections>

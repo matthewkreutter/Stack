@@ -248,7 +248,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let value = snapshot.value as? NSDictionary
                     let name = (value?["name"] as? String)!
                     let category = (value?["category"] as? String)!
-                    let importance = (value?["importance"] as? String)!
+                    let importance = (value?["importance"] as? Int)!
                     let date = (value?["date"] as? String)!
                     let time = (value?["time"] as? String)!
                     let reminder = (value?["reminder"] as? String)!
@@ -260,14 +260,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.allTasks.append(task)
                     if (self.sortedBy == "priority") {
                         self.allTasks = self.allTasks.sorted(by: { $0.priority > $1.priority })
-                        UserDefaults.standard.set(self.allTasks[0].name, forKey: "highestPriorityTask")
+                        let defaults = UserDefaults(suiteName: "group.Stack")
+                        defaults?.set(self.allTasks[0].name, forKey: "highestPriorityTask")
+                        defaults?.synchronize()
                     }
                     else if (self.sortedBy == "importance") {
-                        self.allTasks = self.allTasks.sorted(by: { $0.importance > $1.importance })
-                        print("running")
+                        self.allTasks = self.allTasks.sorted(by: { $0.importance > $1.importance})
                     }
                     else if (self.sortedBy == "due date") {
-                        self.allTasks = self.allTasks.sorted(by: { $0.date > $1.date })
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMM d, yyyy"
+                        let currentDate = Date()
+                        self.allTasks = self.allTasks.sorted(by: {(dateFormatter.date(from: $0.date)?.timeIntervalSince(currentDate))! / 1000000.0 < (dateFormatter.date(from: $1.date)?.timeIntervalSince(currentDate))! / 1000000.0
+                        })
                     }
                     
                     self.tableView.reloadData()
@@ -297,7 +302,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func allTasksListClicked(_ sender: Any) {
         listTypeLabel.text = "All Tasks"
         hideMenu()
-        taskIDs = []
         self.tableView.reloadData()
         loadTasks()
         homeworkList.tintColor = UIColor.appleBlue()
@@ -804,8 +808,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
             cell.textLabel?.textColor = UIColor.gray
         }
-        cell.textLabel?.text = allTasks[indexPath.row].name
         if (!(indexPath.row >= allTasks.count || indexPath.row < 0)) {
+            cell.textLabel?.text = allTasks[indexPath.row].name
             cell.task = Task(id: (allTasks[indexPath.row].id), name: (allTasks[indexPath.row].name), category: (allTasks[indexPath.row].category), importance: (allTasks[indexPath.row].importance), date: (allTasks[indexPath.row].date), time: (allTasks[indexPath.row].time), reminder: (allTasks[indexPath.row].reminder), priority: (allTasks[indexPath.row].priority))
         }
         return cell

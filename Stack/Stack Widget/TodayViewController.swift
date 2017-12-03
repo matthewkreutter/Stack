@@ -27,8 +27,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             loadTasks()
         }
         */
-        print(UserDefaults.standard.string(forKey: "highestPriorityTask")!)
-        taskName.text = UserDefaults.standard.string(forKey: "highestPriorityTask")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let defaults = UserDefaults(suiteName: "group.Stack")
+        defaults?.synchronize()
+        if let task = defaults!.string(forKey: "highestPriorityTask") {
+            self.taskName.text = task
+        }
+        else {
+            self.taskName.text = "Cannot find task"
+        }
     }
     
     func userAlreadyExists() -> Bool {
@@ -46,7 +55,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-        
+    
         completionHandler(NCUpdateResult.newData)
     }
     
