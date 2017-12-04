@@ -133,6 +133,11 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 date.textColor = UIColor.yellow
                 time.textColor = UIColor.yellow
                 taskName.textColor = UIColor.yellow
+                importance.backgroundColor = UIColor.black
+                category.backgroundColor = UIColor.black
+                date.backgroundColor = UIColor.black
+                time.backgroundColor = UIColor.black
+                taskName.backgroundColor = UIColor.black
             }
             if UserDefaults.standard.string(forKey: "textColor") == "Green" {
                 importance.textColor = UIColor.green
