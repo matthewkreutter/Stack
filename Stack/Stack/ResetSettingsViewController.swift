@@ -20,6 +20,8 @@ class ResetSettingsViewController: UIViewController {
     }
     
     @IBAction func yesPressed(_ sender: Any) {
+        UserDefaults.standard.set("Black", forKey: "textColor")
+        UserDefaults.standard.set("White", forKey: "backgroundColor")
         self.view.removeFromSuperview()
     }
     

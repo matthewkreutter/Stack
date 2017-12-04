@@ -40,7 +40,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let taskDate = defaults!.string(forKey: "highestPriorityTaskDate")
         let taskCategory = defaults!.string(forKey: "highestPriorityTaskCategory")
         self.taskName.text = name
-        self.importance.text = "Importance: " + taskImportance!
+        if (taskImportance! != "") {
+            self.importance.text = "Importance: " + taskImportance!
+        } else {
+            self.importance.text = ""
+        }
         self.category.text = taskCategory
         if (taskDate == "Date" || taskDate == "April 24, 3000") {
             self.dueDate.text = "No Due Date"

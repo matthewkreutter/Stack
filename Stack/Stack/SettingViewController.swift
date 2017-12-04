@@ -16,7 +16,7 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let backgroundColorView = UIPickerView()
     let textColorView = UIPickerView()
     
-    var backgroundColorOption = ["Black", "White", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"]
+    var backgroundColorOption = ["White", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"]
     var textColorOption = ["Black", "White", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"]
     var selectedBackground: String {
         return UserDefaults.standard.string(forKey: "backgroundColor") ?? ""

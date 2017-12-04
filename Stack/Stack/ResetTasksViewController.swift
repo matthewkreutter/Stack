@@ -7,19 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class ResetTasksViewController: UIViewController {
 
+    var userID: Int = -1
+    var db: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        
+        userID = UserDefaults.standard.integer(forKey: "userID")
         self.showAnimate()
         
         // Do any additional setup after loading the view.
     }
     
     @IBAction func yesPressed(_ sender: Any) {
+        db = Database.database().reference()
+        let taskListString = "tasks-" + String(userID)
+        let deletedTask = db.child(taskListString)
+        deletedTask.removeValue()
         self.view.removeFromSuperview()
     }
     

@@ -235,6 +235,11 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             dateField.textColor = UIColor.white
             timeField.textColor = UIColor.white
             taskNameField.textColor = UIColor.white
+            importanceField.backgroundColor = UIColor.black
+            categoryField.backgroundColor = UIColor.black
+            dateField.backgroundColor = UIColor.black
+            timeField.backgroundColor = UIColor.black
+            taskNameField.backgroundColor = UIColor.black
         }
         if UserDefaults.standard.string(forKey: "textColor") == "Red" {
             importanceField.textColor = UIColor.red

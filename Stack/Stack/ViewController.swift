@@ -137,8 +137,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         setColors()
-        //self.tableView.reloadData()
+//        loadTasks()
+        self.tableView.reloadData()
     }
+    
     func setColors() {
         let cells = self.tableView.visibleCells
         for cell in cells {
@@ -290,6 +292,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.completedTasks.append(childNameSnapshot.value as! String)
                     self.tableView.reloadData()
                 }
+            }
+            if (self.taskIDs.count == 0) {
+                let defaults = UserDefaults(suiteName: "group.Stack")
+                defaults?.set("Empty Stack", forKey: "highestPriorityTask")
+                defaults?.set("", forKey: "highestPriorityTaskImportance")
+                defaults?.set("", forKey: "highestPriorityTaskDate")
+                defaults?.set("", forKey: "highestPriorityTaskCategory")
+                defaults?.synchronize()
             }
             if (self.completedClicked != true) {
                 for id in self.taskIDs {
@@ -881,8 +891,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (self.completedClicked != true) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            //FIXME delete from Firebase
-            // Create a reference to the file to delete
             db = Database.database().reference()
             let taskListString = "tasks-" + String(userID)
             let deletedTask = db.child(taskListString).child(taskIDs[indexPath.row])
@@ -890,6 +898,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Delete the file
             deletedTask.removeValue()
             taskIDs.remove(at: indexPath.row)
+            loadTasks()
             tableView.reloadData()
         }
         }

@@ -430,8 +430,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArY-tn-9IV">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArY-tn-9IV">
                                         <rect key="frame" x="17" y="37" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="DJf-7a-hys"/>
+                                            <constraint firstAttribute="height" constant="24" id="nml-HZ-Ggp"/>
+                                        </constraints>
                                         <state key="normal" image="typicons_2-0-7_arrow-back_50_0_000000_none"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="EY0-FU-ycE"/>
