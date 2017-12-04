@@ -954,7 +954,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (self.completedClicked != true) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             db = Database.database().reference()
             let taskListString = "tasks-" + String(userID)
@@ -967,15 +966,49 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             loadTasks()
             tableView.reloadData()
         }
-        }
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        if (self.completedClicked != true) {
+        db = Database.database().reference()
         let movedObject = self.taskIDs[sourceIndexPath.row]
         taskIDs.remove(at: sourceIndexPath.row)
         taskIDs.insert(movedObject, at: destinationIndexPath.row)
+        let myTaskString = "tasks-" + String(UserDefaults.standard.integer(forKey: "userID"))
+        if (destinationIndexPath.row == 0) {
+            allTasks[sourceIndexPath.row].priority = allTasks[destinationIndexPath.row].priority + 1
+            let newTask = [
+                "name": allTasks[sourceIndexPath.row].name as Any,
+                "category": allTasks[sourceIndexPath.row].category as Any,
+                "importance": allTasks[sourceIndexPath.row].importance as Any,
+                "date": allTasks[sourceIndexPath.row].date as Any,
+                "time": allTasks[sourceIndexPath.row].time as Any,
+                "priority": allTasks[sourceIndexPath.row].priority as Any
+                ] as [String: Any]
+            self.db.child(myTaskString).child(allTasks[sourceIndexPath.row].id).setValue(newTask)
+        } else if (destinationIndexPath.row == allTasks.count - 1) {
+            allTasks[sourceIndexPath.row].priority = allTasks[destinationIndexPath.row].priority - 1
+            let newTask = [
+                "name": allTasks[sourceIndexPath.row].name as Any,
+                "category": allTasks[sourceIndexPath.row].category as Any,
+                "importance": allTasks[sourceIndexPath.row].importance as Any,
+                "date": allTasks[sourceIndexPath.row].date as Any,
+                "time": allTasks[sourceIndexPath.row].time as Any,
+                "priority": allTasks[sourceIndexPath.row].priority as Any
+                ] as [String: Any]
+            self.db.child(myTaskString).child(allTasks[sourceIndexPath.row].id).setValue(newTask)
+        } else {
+            allTasks[sourceIndexPath.row].priority = (allTasks[destinationIndexPath.row - 1].priority + allTasks[destinationIndexPath.row].priority) / 2.0
+            let newTask = [
+                "name": allTasks[sourceIndexPath.row].name as Any,
+                "category": allTasks[sourceIndexPath.row].category as Any,
+                "importance": allTasks[sourceIndexPath.row].importance as Any,
+                "date": allTasks[sourceIndexPath.row].date as Any,
+                "time": allTasks[sourceIndexPath.row].time as Any,
+                "priority": allTasks[sourceIndexPath.row].priority as Any
+                ] as [String: Any]
+            self.db.child(myTaskString).child(allTasks[sourceIndexPath.row].id).setValue(newTask)
         }
+        loadTasks()
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
