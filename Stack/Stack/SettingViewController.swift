@@ -52,22 +52,6 @@ class SettingViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         backgroundColorField.layer.cornerRadius = 5.0
     }
     
-    @IBAction func resetSettingsPressed(_ sender: Any) {
-        let resetSettingsPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "resetSettingsPopUpID") as! ResetSettingsViewController
-        self.addChildViewController(resetSettingsPopUp)
-        resetSettingsPopUp.view.frame = self.view.frame
-        self.view.addSubview(resetSettingsPopUp.view)
-        resetSettingsPopUp.didMove(toParentViewController: self)
-    }
-    
-    @IBAction func resetTasksPressed(_ sender: Any) {
-        let resetTasksPopUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "resetTasksPopUpID") as! ResetTasksViewController
-        self.addChildViewController(resetTasksPopUp)
-        resetTasksPopUp.view.frame = self.view.frame
-        self.view.addSubview(resetTasksPopUp.view)
-        resetTasksPopUp.didMove(toParentViewController: self)
-    }
-    
     func createPicker() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()

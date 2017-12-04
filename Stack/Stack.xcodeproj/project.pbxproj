@@ -17,6 +17,7 @@
 		2EBD67B41FD1E0530065B619 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD67B31FD1E0530065B619 /* TableViewCell.swift */; };
 		2ECA3B251FC0D30F004EBB85 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */; };
 		2ECA3B271FC0D343004EBB85 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA3B261FC0D343004EBB85 /* Task.swift */; };
+		2EE267B71FD4EE1F0097097C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE267B61FD4EE1F0097097C /* AboutViewController.swift */; };
 		4CB7F96A119778193EA2BEAC /* Pods_Stack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7E0ADB335C1F6BD7971AE5 /* Pods_Stack.framework */; };
 		6FE5135B2834EA0017E0E582 /* Pods_Stack_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D66541721E3F040A9E92FD /* Pods_Stack_Widget.framework */; };
 		AE2B89917830CA3DD572382F /* Pods_StackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1682EC5F6F41643BACD6986 /* Pods_StackTests.framework */; };
@@ -28,9 +29,6 @@
 		FDB58E9D1FC3D905003021F2 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB58E9C1FC3D905003021F2 /* TodayViewController.swift */; };
 		FDB58EA01FC3D905003021F2 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB58E9E1FC3D905003021F2 /* MainInterface.storyboard */; };
 		FDB58EA41FC3D905003021F2 /* Stack Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FDB58E971FC3D905003021F2 /* Stack Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		FDB8B1F71FC66FB9001F8BAE /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */; };
-		FDB8B1F91FC67A11001F8BAE /* ResetSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */; };
-		FDB8B1FB1FC67EE6001F8BAE /* ResetTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +89,7 @@
 		2EBD67B31FD1E0530065B619 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		2ECA3B261FC0D343004EBB85 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		2EE267B61FD4EE1F0097097C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		4652E4E9406B5B0BB095A223 /* Pods-Stack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stack/Pods-Stack.debug.xcconfig"; sourceTree = "<group>"; };
 		54C7C8D5801C9583E0380D05 /* Pods-Stack Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stack Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stack Widget/Pods-Stack Widget.release.xcconfig"; sourceTree = "<group>"; };
 		7711B3F5FCD4EAD719FFE82B /* Pods-Stack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stack.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stack/Pods-Stack.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,9 +109,6 @@
 		FDB58E9C1FC3D905003021F2 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		FDB58E9F1FC3D905003021F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		FDB58EA11FC3D905003021F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
-		FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetSettingsViewController.swift; sourceTree = "<group>"; };
-		FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTasksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,12 +185,10 @@
 				2ECA3B241FC0D30F004EBB85 /* AddTaskViewController.swift */,
 				FD5BB6C01FC1FCA4007FE558 /* EditTaskViewController.swift */,
 				FDACEF951FC352FE00C50BDF /* SettingViewController.swift */,
-				FDB8B1F61FC66FB9001F8BAE /* AddListViewController.swift */,
-				FDB8B1F81FC67A11001F8BAE /* ResetSettingsViewController.swift */,
-				FDB8B1FA1FC67EE6001F8BAE /* ResetTasksViewController.swift */,
 				2ECA3B261FC0D343004EBB85 /* Task.swift */,
 				FDA066F91FC7BE6600D6D5A8 /* GoogleService-Info.plist */,
 				2EBD67B31FD1E0530065B619 /* TableViewCell.swift */,
+				2EE267B61FD4EE1F0097097C /* AboutViewController.swift */,
 			);
 			path = Stack;
 			sourceTree = "<group>";
@@ -632,13 +626,11 @@
 			files = (
 				2ECA3B271FC0D343004EBB85 /* Task.swift in Sources */,
 				2E4B4EF81FB643D600D8FBFD /* ViewController.swift in Sources */,
-				FDB8B1F71FC66FB9001F8BAE /* AddListViewController.swift in Sources */,
-				FDB8B1FB1FC67EE6001F8BAE /* ResetTasksViewController.swift in Sources */,
 				FD5BB6C11FC1FCA4007FE558 /* EditTaskViewController.swift in Sources */,
 				2EBD67B41FD1E0530065B619 /* TableViewCell.swift in Sources */,
 				2ECA3B251FC0D30F004EBB85 /* AddTaskViewController.swift in Sources */,
-				FDB8B1F91FC67A11001F8BAE /* ResetSettingsViewController.swift in Sources */,
 				2E4B4EF61FB643D600D8FBFD /* AppDelegate.swift in Sources */,
+				2EE267B71FD4EE1F0097097C /* AboutViewController.swift in Sources */,
 				FDACEF961FC352FE00C50BDF /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

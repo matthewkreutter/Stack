@@ -289,7 +289,6 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        
         else {
             // push new task to database
             var timeDifference = 0.0
@@ -303,6 +302,9 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 let formattedDate = dateFormatter.date(from: date.text!)
                 let currentDate = Date()
                 timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
+                if (timeDifference < 0) {
+                    timeDifference = 0.0000001
+                }
                 dateString = date.text!
             }
             

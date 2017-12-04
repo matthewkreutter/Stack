@@ -45,19 +45,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var myTaskDict = [String: Task]()
     var allTasks = [Task]()
     var sortedBy = ""
-    var allClicked = false
+    var allClicked = true
     var homeworkClicked = false
     var choresClicked = false
     var errandsClicked = false
     var miscellaneousClicked = false
     var completedClicked = false
+    var myStackClicked = true
+    var importanceClicked = false
+    var dueDateClicked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         sortedBy = "priority"
-        allClicked = true
         db = Database.database().reference()
         
         if (userAlreadyExists()) {
@@ -139,6 +141,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setColors()
 //        loadTasks()
         self.tableView.reloadData()
+    }
+    
+    func setMenuTextColor(color: UIColor) {
+        if (allClicked) {
+            allTasksList.tintColor = color
+        } else if (homeworkClicked) {
+            homeworkList.tintColor = color
+        } else if (choresClicked) {
+            choresList.tintColor = color
+        } else if (errandsClicked) {
+            errandsList.tintColor = color
+        } else if (miscellaneousClicked) {
+            miscellaneousList.tintColor = color
+        } else if (completedClicked) {
+            completedTasksList.tintColor = color
+        }
+        
+        if (myStackClicked) {
+            priorityScoreOutlet.tintColor = color
+        } else if (importanceClicked) {
+            importanceOutlet.tintColor = color
+        } else if (dueDateClicked) {
+            dueDateOutlet.tintColor = color
+        }
     }
     
     func setColors() {
@@ -244,9 +270,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if UserDefaults.standard.string(forKey: "backgroundColor") == "Grey" {
             tableView.backgroundColor = UIColor.gray
         }
+        if UserDefaults.standard.string(forKey: "textColor") == "Black" {
+            setMenuTextColor(color: UIColor.black)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "White" {
+            setMenuTextColor(color: UIColor.white)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Red" {
+            setMenuTextColor(color: UIColor.red)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Orange" {
+            setMenuTextColor(color: UIColor.orange)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Yellow" {
+            setMenuTextColor(color: UIColor.yellow)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Green" {
+            setMenuTextColor(color: UIColor.green)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Blue" {
+            setMenuTextColor(color: UIColor.blue)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Purple" {
+            setMenuTextColor(color: UIColor.purple)
+        }
+        if UserDefaults.standard.string(forKey: "textColor") == "Grey" {
+            setMenuTextColor(color: UIColor.gray)
+        }
     }
     
     func loadTasks() {
+        moveTasksClicked.tintColor = UIColor.appleBlue()
+        editingTasks = false
+        self.tableView.isEditing = false
         allTasks = []
         taskIDs = []
         completedTasks = []
@@ -635,6 +691,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBAction func allTasksFilterClicked(_ sender: Any) {
+        myStackClicked = true
+        importanceClicked = false
+        dueDateClicked = false
         hideMenu()
         sortedBy = "priority"
         loadTasks()
@@ -670,6 +729,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func importanceClicked(_ sender: Any) {
+        myStackClicked = false
+        importanceClicked = true
+        dueDateClicked = false
         hideMenu()
         sortedBy = "importance"
         loadTasks()
@@ -705,6 +767,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func dueDateClicked(_ sender: Any) {
+        myStackClicked = false
+        importanceClicked = false
+        dueDateClicked = true
         hideMenu()
         sortedBy = "due date"
         loadTasks()
@@ -740,22 +805,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     var editingTasks = false
     @IBAction func moveTasksAction(_ sender: Any) {
-        if (completedClicked != true) {
-        if editingTasks == false {
-            hideMenu()
-            moveTasksClicked.tintColor = UIColor.red
-            self.tableView.isEditing = true
-            editingTasks = true
+        if (allClicked && myStackClicked) {
+            if editingTasks == false {
+                hideMenu()
+                moveTasksClicked.tintColor = UIColor.red
+                self.tableView.isEditing = true
+                editingTasks = true
+            }
+            else {
+                hideMenu()
+                moveTasksClicked.tintColor = UIColor.appleBlue()
+                editingTasks = false
+                self.tableView.isEditing = false
+            }
         }
         else {
-            hideMenu()
-            moveTasksClicked.tintColor = UIColor.appleBlue()
-            editingTasks = false
-            self.tableView.isEditing = false
-        }
-        }
-        else {
-            let alert = UIAlertController(title: "Error", message: "Can't reorder completed tasks.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Error", message: "Can't reorder tasks unless menu items are set to \"All Tasks\" and \"My Stack\".", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -893,11 +958,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == UITableViewCellEditingStyle.delete {
             db = Database.database().reference()
             let taskListString = "tasks-" + String(userID)
-            let deletedTask = db.child(taskListString).child(taskIDs[indexPath.row])
+            let deletedTask = db.child(taskListString).child(allTasks[indexPath.row].id)
+            //taskIDs[allTasks[indexPath.row].id as String] = nil
             
             // Delete the file
             deletedTask.removeValue()
-            taskIDs.remove(at: indexPath.row)
+            allTasks.remove(at: indexPath.row)
             loadTasks()
             tableView.reloadData()
         }
@@ -913,12 +979,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if (self.completedClicked != true) {
-        if (editingTasks == true) {
-            return .none
-        }
-        return .delete
-        }
         return .none
     }
     

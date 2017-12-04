@@ -150,6 +150,9 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 let formattedDate = dateFormatter.date(from: dateField.text!)
                 let currentDate = Date()
                 timeDifference = (formattedDate?.timeIntervalSince(currentDate))! / 1000000.0
+                if (timeDifference < 0) {
+                    timeDifference = 0.0000001
+                }
                 dateString = dateField.text!
             }
         let tempImportance = importanceField.text!
@@ -187,7 +190,6 @@ class EditTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         // Delete the file
         deletedTask.removeValue()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
